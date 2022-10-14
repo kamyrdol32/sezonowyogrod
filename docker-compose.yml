@@ -2,11 +2,49 @@ version: "3.8"
 
 services:
     nginx:
-        depends_on:
-            - react
-        restart: always
-        build:
-            context: ./nginx
-            dockerfile: Dockerfile
+        image: nginx:latest
+        container_name: nginx
+        volumes:
+            -   ./nginx.conf:/etc/nginx/nginx.conf
         ports:
-            - "80:80"
+            -   80:80
+        networks:
+            -   web
+        depends_on:
+            -   backend
+            -   frontend
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: backend
+        command:
+            -   gunicorn --workers 3 --bind unix:/home/Projects/SezonowyOgrod/app.sock -m 777 wsgi:app
+        volumes:
+            -   ./backend:/home/Projects/SezonowyOgrod
+        networks:
+            web:
+                aliases:
+                    -   backend
+        expose:
+            -   5000
+        ports:
+            -   5000:5000
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        container_name: frontend
+        command:
+            -   npm start
+        volumes:
+            -   ./frontend:/home/Projects/SezonowyOgrod
+        networks:
+            web:
+                aliases:
+                    -   frontend
+        stdin_open: true
+        ports:
+            -   3000:3000
+networks:
+    web:

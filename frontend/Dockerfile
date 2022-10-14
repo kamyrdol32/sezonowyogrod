@@ -1,7 +1,14 @@
+# Image
 FROM node:alpine
+
+# Work directory
 WORKDIR /frontend
-COPY package.json ./
-COPY package-lock.json ./
+
+# Requirements & Installations
+COPY package*.json ./
+RUN npm ci -qy
+
+# Copy source code
 COPY ./ ./
-RUN npm install
-RUN npm run build
+
+EXPOSE 3000
