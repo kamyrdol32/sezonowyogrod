@@ -6,7 +6,7 @@ WORKDIR /frontend
 
 # Requirements & Installations
 COPY package*.json ./
-RUN npm ci -qy
+RUN npm install
 
 # Copy source code
 COPY ./ ./

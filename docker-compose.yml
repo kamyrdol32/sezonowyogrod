@@ -21,7 +21,7 @@ services:
         command:
             -   gunicorn --workers 3 --bind unix:/home/Projects/SezonowyOgrod/app.sock -m 777 wsgi:app
         volumes:
-            -   ./backend:/home/Projects/SezonowyOgrod
+            -   ./backend:/home/Projects/SezonowyOgrod/backend
         networks:
             web:
                 aliases:
@@ -38,7 +38,7 @@ services:
         command:
             -   npm start
         volumes:
-            -   ./frontend:/home/Projects/SezonowyOgrod
+            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
         networks:
             web:
                 aliases:
