@@ -1,78 +1,55 @@
-version: '3.8'
+version: "3.8"
 
 services:
 
 
     nginx:
-      build: ./nginx
-      ports:
-        - 1337:80
-      depends_on:
-        - web
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        container_name: nginx
+        ports:
+            -   1337:80
+        networks:
+            -   default
+            -   web
+        depends_on:
+            -   backend
+#            -   frontend
 
 
-    web:
-      build:
-        context: ./web
-        dockerfile: Dockerfile.prod
-      command: gunicorn --bind 0.0.0.0:5000 manage:app
-      expose:
-        - 5000
+    backend:
+        build:
+            context: web
+            dockerfile: Dockerfile
+        container_name: web
+        volumes:
+            -   ./web:/home/Projects/SezonowyOgrod/web
+        networks:
+            web:
+                aliases:
+                    -   web
+        expose:
+            -   5000
+        environment:
+            -   FLASK_APP=core.py
+            -   FLASK_ENV=development
+            -   FLASK_DEBUG=1
 
 
-
-#version: "3.8"
-#
-#services:
-#
-#
-#    nginx:
+#    frontend:
 #        build:
-#            context: ./nginx
+#            context: ./frontend
 #            dockerfile: Dockerfile
-#        container_name: nginx
-#        ports:
-#            -   1337:80
-#        networks:
-#            -   default
-#            -   web
-#        depends_on:
-#            -   backend
-##            -   frontend
-#
-#
-#    backend:
-#        build:
-#            context: web
-#            dockerfile: Dockerfile
-#        container_name: web
+#        container_name: frontend
 #        volumes:
-#            -   ./web:/home/Projects/SezonowyOgrod/web
+#            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
 #        networks:
 #            web:
 #                aliases:
-#                    -   web
-#        expose:
-#            -   5000
-#        environment:
-#            -   FLASK_APP=core.py
-#            -   FLASK_ENV=development
-#            -   FLASK_DEBUG=1
-#
-#
-##    frontend:
-##        build:
-##            context: ./frontend
-##            dockerfile: Dockerfile
-##        container_name: frontend
-##        volumes:
-##            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
-##        networks:
-##            web:
-##                aliases:
-##                    -   frontend
-##        stdin_open: true
-#
-#
-#networks:
-#    web:
+#                    -   frontend
+#        stdin_open: true
+
+
+networks:
+    web:
