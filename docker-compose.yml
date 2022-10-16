@@ -20,15 +20,15 @@ services:
 
     backend:
         build:
-            context: web
+            context: backend
             dockerfile: Dockerfile
-        container_name: web
+        container_name: backend
         volumes:
-            -   ./web:/home/Projects/SezonowyOgrod/web
+            -   ./backend:/home/Projects/SezonowyOgrod/backend
         networks:
             web:
                 aliases:
-                    -   web
+                    -   backend
         expose:
             -   5000
         environment:
@@ -45,7 +45,7 @@ services:
 #        volumes:
 #            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
 #        networks:
-#            web:
+#            backend:
 #                aliases:
 #                    -   frontend
 #        stdin_open: true
