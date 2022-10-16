@@ -9,6 +9,7 @@ services:
         ports:
             -   80:80
         networks:
+            -   default
             -   web
         depends_on:
             -   backend
