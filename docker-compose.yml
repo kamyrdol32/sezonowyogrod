@@ -19,8 +19,6 @@ services:
             context: ./backend
             dockerfile: Dockerfile
         container_name: backend
-        command:
-            -   gunicorn --workers 3 --bind unix:/home/Projects/SezonowyOgrod/app.sock -m 777 wsgi:app
         volumes:
             -   ./backend:/home/Projects/SezonowyOgrod/backend
         networks:
@@ -31,6 +29,10 @@ services:
             -   5000
         ports:
             -   5000:5000
+        environment:
+            -   FLASK_APP=core.py
+            -   FLASK_ENV=development
+            -   FLASK_DEBUG=1
     frontend:
         build:
             context: ./frontend
