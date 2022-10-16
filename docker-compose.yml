@@ -15,7 +15,7 @@ services:
             -   web
         depends_on:
             -   backend
-            -   frontend
+#            -   frontend
 
 
     backend:
@@ -37,18 +37,18 @@ services:
             -   FLASK_DEBUG=1
 
 
-    frontend:
-        build:
-            context: ./frontend
-            dockerfile: Dockerfile
-        container_name: frontend
-        volumes:
-            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
-        networks:
-            web:
-                aliases:
-                    -   frontend
-        stdin_open: true
+#    frontend:
+#        build:
+#            context: ./frontend
+#            dockerfile: Dockerfile
+#        container_name: frontend
+#        volumes:
+#            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
+#        networks:
+#            web:
+#                aliases:
+#                    -   frontend
+#        stdin_open: true
 
 
 networks:
