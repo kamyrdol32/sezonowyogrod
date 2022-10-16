@@ -9,8 +9,7 @@ services:
             dockerfile: Dockerfile
         container_name: nginx
         ports:
-            -   80:80
-            -   5000:5000
+            -   1337:80
         networks:
             -   default
             -   web
