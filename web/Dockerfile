@@ -7,6 +7,8 @@ WORKDIR /backend
 # Environment variables
 ENV FLASK_APP=core.py
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Requirements & Installations
 RUN pip install --upgrade pip
@@ -20,4 +22,4 @@ EXPOSE 5000
 COPY . .
 
 # Run
-CMD ["flask", "run"]
+CMD ["python", "manage.py", "run"]
