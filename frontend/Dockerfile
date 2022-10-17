@@ -7,11 +7,11 @@ WORKDIR /frontend
 # Requirements
 COPY package*.json ./
 
-# Installations
-RUN npm install
-
 # Copy source code
 COPY ./ ./
+
+# Installations
+RUN npm install
 
 # Build
 # RUN npm run build
@@ -29,4 +29,3 @@ COPY ./ ./
 EXPOSE 3000
 #
 # Run
-CMD ["npm", "start"]
