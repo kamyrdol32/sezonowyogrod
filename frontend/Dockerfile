@@ -1,11 +1,13 @@
 # Image
-FROM node:alpine
+FROM node:alpine as build-stage
 
 # Work directory
 WORKDIR /frontend
 
-# Requirements & Installations
+# Requirements
 COPY package*.json ./
+
+# Installations
 RUN npm install
 
 # Copy source code
@@ -13,6 +15,9 @@ COPY ./ ./
 
 # Build
 RUN npm run build
+
+## Copy build files
+#COPY --from=build-stage /app/build/ /usr/share/nginx/html
 
 # Expose port
 EXPOSE 3000
