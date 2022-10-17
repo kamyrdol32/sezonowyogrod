@@ -12,14 +12,19 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import TableFooter from '@mui/material/TableFooter';
+import Grid from '@mui/material/Grid';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
 
 
 export default function Home() {
 
-  const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const pages = ['Galeria', 'Sklep', 'Menu','Rezerwacja'];
+  const settings = ['Profile', 'Logout'];
 
-const ResponsiveAppBar = () => {
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -38,9 +43,21 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const photo = [
+    {
+      img: 'jonathan-borba-uB7q7aipU2o-unsplash.jpg',
+      title: 'Hands',
+    },
+    {
+      img: 'chris-liverani-oCsaxvGCehM-unsplash.jpg',
+      title: 'Restaurant',
+    }, 
+  ];
+
   return (
-     <AppBar position="static">
-      <Container maxWidth="xl">
+    <>
+     <AppBar position="static" style={{background: 'black'}}>
+      <Box>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
@@ -112,11 +129,12 @@ const ResponsiveAppBar = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              
             }}
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -130,8 +148,8 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2}}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/4.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -158,8 +176,27 @@ const ResponsiveAppBar = () => {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
+      </Box>
     </AppBar>
-    
-  );
-              };}
+    <Box sx={{mt: 7, mr: 5, ml: 5}}>
+    <Grid container spacing={2}>
+        <Grid xs={4} sx={{p: 4}}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque urna mi, vestibulum ut rutrum eget, lacinia a velit. Nullam hendrerit mi at diam pretium convallis. Vivamus commodo est nisi, ac semper ante vestibulum at. Quisque condimentum sed tellus at hendrerit. Aenean erat dolor, interdum eget dictum vitae, porta sit amet mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sit amet interdum odio. Suspendisse ut massa elementum, gravida lorem ut, auctor metus. Etiam aliquet mauris ex, vel mattis mi viverra ac. Nam semper risus eu quam convallis tincidunt. Morbi rhoncus neque ligula, sit amet tempus lectus sagittis eu. Pellentesque tincidunt dapibus orci, vitae tristique mi pellentesque vel. Fusce sit amet ultrices magna. Aenean euismod id erat sed malesuada. Ut sit amet lacinia tellus. In ullamcorper sodales mauris, sit amet posuere tortor.
+        </Grid>
+        <Grid xs={5}>
+           <ImageList >
+            {photo.map((item) => (
+              <ImageListItem key={item.img} sx={{width: 300,height: 300}}>
+                <img
+                  src={`${item.img}`}        
+                  alt={item.title}
+                  
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>  
+        </Grid>
+      </Grid> 
+    </Box>
+  </> 
+  );   };
