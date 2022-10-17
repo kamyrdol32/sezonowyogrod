@@ -17,6 +17,8 @@ COPY ./ ./
 RUN npm run build
 
 ## Copy build files
+FROM nginx:alpine AS prod
+WORKDIR /usr/share/nginx/html
 COPY --from=builder /frontend/build /usr/share/nginx/html
 
 ## Expose port
