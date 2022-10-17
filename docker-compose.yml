@@ -45,7 +45,7 @@ services:
         volumes:
             -   ./frontend:/home/Projects/SezonowyOgrod/frontend
         networks:
-            backend:
+            web:
                 aliases:
                     -   frontend
         stdin_open: true
