@@ -29,8 +29,8 @@ services:
             web:
                 aliases:
                     -   backend
-        expose:
-            -   5000
+#        expose:
+#            -   5000
         environment:
             -   FLASK_APP=core.py
             -   FLASK_ENV=development
