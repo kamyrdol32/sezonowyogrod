@@ -1,5 +1,5 @@
 # Image
-FROM node:alpine as builder
+FROM node:alpine
 
 # Work directory
 WORKDIR /frontend
@@ -16,13 +16,11 @@ COPY ./ ./
 # Build
 RUN npm run build
 
-FROM nginx:1.15
-
 ## Copy build files
-COPY --from=builder /frontend/build /usr/share/nginx/html
+COPY /build /usr/share/nginx/html
 
-# Expose port
-EXPOSE 3000
-
-# Run
-CMD ["npm", "start"]
+## Expose port
+#EXPOSE 3000
+#
+## Run
+#CMD ["npm", "start"]
