@@ -29,12 +29,19 @@ services:
             web:
                 aliases:
                     -   backend
-#        expose:
-#            -   5000
-#        environment:
-#            -   FLASK_APP=core.py
-#            -   FLASK_ENV=development
-#            -   FLASK_DEBUG=1
+
+
+    backend2:
+        build:
+            context: backend2
+            dockerfile: Dockerfile
+        container_name: backend2
+        volumes:
+            -   ./backend:/home/Projects/SezonowyOgrod/backend2
+        networks:
+            web:
+                aliases:
+                    -   backend2
 
 
     frontend:
