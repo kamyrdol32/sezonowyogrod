@@ -16,8 +16,11 @@ COPY ./ ./
 # Build
 RUN npm run build
 
-# Expose port
-EXPOSE 3000
+# Copy build files
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
 
-# Run
-CMD ["npm", "start"]
+## Expose port
+#EXPOSE 3000
+#
+## Run
+#CMD ["npm", "start"]
