@@ -23,7 +23,7 @@ FROM nginx:alpine
 #WORKDIR /usr/share/nginx/html
 
 #
-COPY --from=builder /frontend/build /var/www/sezonowyogrod.kamilzeglen.pl
+COPY --from=builder /frontend/build/* /var/www/sezonowyogrod.kamilzeglen.pl/html/
 
 # Expose port
 EXPOSE 3000
