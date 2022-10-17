@@ -23,8 +23,6 @@ services:
             context: backend
             dockerfile: Dockerfile
         container_name: backend
-        volumes:
-            -   ./backend:/home/Projects/SezonowyOgrod/backend
         networks:
             web:
                 aliases:
@@ -49,8 +47,6 @@ services:
             context: ./frontend
             dockerfile: Dockerfile
         container_name: frontend
-        volumes:
-            -   ./frontend:/home/Projects/SezonowyOgrod/frontend
         networks:
             web:
                 aliases:
