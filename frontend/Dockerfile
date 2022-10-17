@@ -25,8 +25,8 @@ WORKDIR /usr/share/nginx/html
 #
 COPY --from=builder /frontend/build /usr/share/nginx/html
 
-## Expose port
-#EXPOSE 3000
+# Expose port
+EXPOSE 3000
 #
 ## Run
 #CMD ["npm", "start"]
