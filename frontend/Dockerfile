@@ -24,10 +24,9 @@ WORKDIR /usr/share/nginx/html
 
 # Copy build
 COPY --from=builder /frontend/build /usr/share/nginx/html
-COPY --from=builder /nginx.conf /etc/nginx/conf.d/default.conf
 
-## Expose port
-#EXPOSE 3000
-#
+# Expose port
+EXPOSE 3000
+
 ### Run
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
