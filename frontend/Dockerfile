@@ -16,13 +16,17 @@ COPY ./ ./
 # Build
 RUN npm run build
 
-## Copy build files
-FROM nginx:alpine AS prod
+# Image Nginx
+FROM nginx:alpine
+
+# Work directory
 WORKDIR /usr/share/nginx/html
+
+# Copy build
 COPY --from=builder /frontend/build /usr/share/nginx/html
 
-## Expose port
-#EXPOSE 3000
-#
+# Expose port
+EXPOSE 3000
+
 ## Run
-#CMD ["npm", "start"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
