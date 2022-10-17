@@ -17,7 +17,7 @@ COPY ./ ./
 RUN npm run build
 
 # Image Nginx
-#FROM nginx:alpine
+FROM nginx:alpine
 
 # Work directory
 #WORKDIR /usr/share/nginx/html
