@@ -17,7 +17,7 @@ COPY ./ ./
 RUN npm run build
 
 ## Copy build files
-COPY /build /usr/share/nginx/html
+COPY /frontend/build /usr/share/nginx/html
 
 ## Expose port
 #EXPOSE 3000
