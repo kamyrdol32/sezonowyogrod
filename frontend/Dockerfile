@@ -1,5 +1,5 @@
 # Image
-FROM node:alpine as build-stage
+FROM node:alpine as builder
 
 # Work directory
 WORKDIR /frontend
@@ -17,7 +17,7 @@ COPY ./ ./
 RUN npm run build
 
 ## Copy build files
-#COPY --from=build-stage /app/build/ /usr/share/nginx/html
+COPY --from=builder /frontend/build /usr/share/nginx/html
 
 # Expose port
 EXPOSE 3000
