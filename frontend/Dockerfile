@@ -1,11 +1,21 @@
-# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM tiangolo/node-frontend:10 as build-stage
+# Image
+FROM node:alpine
+
+# Work directory
 WORKDIR /frontend
-COPY package*.json /frontend/
+
+# Requirements & Installations
+COPY package*.json ./
 RUN npm install
-COPY ./ /frontend/
+
+# Copy source code
+COPY ./ ./
+
+# Build
 RUN npm run build
 
-# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-FROM nginx:1.15
-COPY --from=build-stage /frontend/build/ /usr/share/nginx/html
+# Expose port
+EXPOSE 3000
+
+# Run
+CMD ["npm", "start"]
