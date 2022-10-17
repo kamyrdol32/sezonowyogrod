@@ -1,26 +1,14 @@
-# Image
-FROM node:alpine as builder
-
-# Work directory
+FROM node AS prod
 WORKDIR /frontend
-
-# Requirements
 COPY package*.json ./
-
-# Installations
 RUN npm install
-
-# Copy source code
-COPY ./ ./
-
-# Build
+COPY . .
+# RUN npm test - if you want to test before to build
 RUN npm run build
 
-## Copy build files
-COPY --from=builder /frontend/build /usr/share/nginx/html
-
-# Expose port
-EXPOSE 3000
-
-# Run
-CMD ["npm", "start"]
+FROM nginx:alpine AS prod
+WORKDIR /usr/share/nginx/html
+COPY --from=prod /frontend/build .
+EXPOSE 80
+# run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
