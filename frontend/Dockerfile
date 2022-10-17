@@ -1,11 +1,13 @@
 # Image
-FROM node:alpine
+FROM node:alpine as build-stage
 
 # Work directory
 WORKDIR /frontend
 
-# Requirements & Installations
+# Requirements
 COPY package*.json ./
+
+# Installations
 RUN npm install
 
 # Copy source code
