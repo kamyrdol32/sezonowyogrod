@@ -27,6 +27,3 @@ COPY --from=builder /frontend/build/* /var/www/sezonowyogrod.kamilzeglen.pl/html
 
 # Expose port
 EXPOSE 3000
-#
-## Run
-#CMD ["npm", "start"]
