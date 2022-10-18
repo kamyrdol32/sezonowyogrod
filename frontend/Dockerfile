@@ -13,8 +13,8 @@ RUN npm install
 # Copy source code
 COPY ./ ./
 
-# Build
-RUN npm run build
+## Build
+#RUN npm run build
 
 # Copy test file
 COPY index.html /usr/share/nginx/html/index.html
@@ -23,8 +23,8 @@ COPY index.html /usr/share/nginx/html/index.html
 # Image Nginx
 FROM nginx:alpine
 
-# Copy build
-COPY --from=builder /frontend/build/ /usr/share/nginx/html
+## Copy build
+#COPY --from=builder /frontend/build/ /usr/share/nginx/html
 
-# Expose port
-EXPOSE 3000
+## Expose port
+#EXPOSE 3000
