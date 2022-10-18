@@ -1,33 +1,24 @@
 # Image
-#FROM node:alpine as builder
+FROM node:alpine as builder
 
 # Work directory
-#WORKDIR /frontend
+WORKDIR /frontend
 
 # Requirements
-#COPY package*.json ./
+COPY package*.json ./
 
 # Installations
-#RUN npm install
+RUN npm install
 
 # Copy source code
-#COPY ./ ./
+COPY ./ ./
 
-## Build
-#RUN npm run build
-
-# Copy test file
-#COPY ../src/index.html /usr/share/nginx/html/index.html
-#COPY ../src/index.html /var/www/sezonowyogrod.kamilzeglen.pl
-
-COPY ../src/index.html /usr/share/nginx/html/index.html
+# Build
+RUN npm run build
 
 
 # Image Nginx
-#FROM nginx:alpine
+FROM nginx:alpine
 
 ## Copy build
-#COPY --from=builder /frontend/build/ /usr/share/nginx/html
-
-## Expose port
-#EXPOSE 3000
+COPY --from=builder /frontend/build/ /usr/share/nginx/html
