@@ -16,6 +16,8 @@ COPY ./ ./
 # Build
 RUN npm run build
 
+
+
 # Image Nginx
 FROM nginx:alpine
 
@@ -23,7 +25,7 @@ FROM nginx:alpine
 #WORKDIR /usr/share/nginx/html
 
 # Copy build
-COPY --from=builder /frontend/build/* /var/www/sezonowyogrod.kamilzeglen.pl/html/
+COPY --from=build-stage /frontend/build/ /usr/share/nginx/html
 
 # Expose port
-EXPOSE 3000
+#EXPOSE 3000
