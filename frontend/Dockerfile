@@ -20,7 +20,7 @@ COPY ./ ./
 #COPY ../src/index.html /usr/share/nginx/html/index.html
 #COPY ../src/index.html /var/www/sezonowyogrod.kamilzeglen.pl
 
-VOLUME ../src /usr/share/nginx/html
+COPY ../src/index.html /usr/share/nginx/html/index.html
 
 
 # Image Nginx
