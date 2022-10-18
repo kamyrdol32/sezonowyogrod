@@ -16,7 +16,7 @@ services:
             -   web
         depends_on:
             -   backend
-#            -   frontend
+            -   frontend
 
 
     backend:
