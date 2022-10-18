@@ -11,13 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import TableFooter from '@mui/material/TableFooter';
 import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-
 
 export default function Home() {
 
@@ -57,9 +53,8 @@ export default function Home() {
   return (
     <>
      <AppBar position="static" style={{background: 'black'}}>
-      <Box>
+      <Container>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -75,7 +70,7 @@ export default function Home() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Sezonowy Ogród
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -114,7 +109,7 @@ export default function Home() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          
           <Typography
             variant="h5"
             noWrap
@@ -132,7 +127,7 @@ export default function Home() {
               
             }}
           >
-            LOGO
+            Sezonowy Ogród
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {pages.map((page) => (
@@ -176,27 +171,27 @@ export default function Home() {
             </Menu>
           </Box>
         </Toolbar>
-      </Box>
+      </Container>
     </AppBar>
-    <Box sx={{mt: 7, mr: 5, ml: 5}}>
-    <Grid container spacing={2}>
-        <Grid xs={4} sx={{p: 4}}>
+    <Grid container direction="row" justifyContent="center" sx={{p:6}}>
+        <Grid lg={3} sx={{pr:3, pt:2, pl:3, textAlign: 'justify'}} >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque urna mi, vestibulum ut rutrum eget, lacinia a velit. Nullam hendrerit mi at diam pretium convallis. Vivamus commodo est nisi, ac semper ante vestibulum at. Quisque condimentum sed tellus at hendrerit. Aenean erat dolor, interdum eget dictum vitae, porta sit amet mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi sit amet interdum odio. Suspendisse ut massa elementum, gravida lorem ut, auctor metus. Etiam aliquet mauris ex, vel mattis mi viverra ac. Nam semper risus eu quam convallis tincidunt. Morbi rhoncus neque ligula, sit amet tempus lectus sagittis eu. Pellentesque tincidunt dapibus orci, vitae tristique mi pellentesque vel. Fusce sit amet ultrices magna. Aenean euismod id erat sed malesuada. Ut sit amet lacinia tellus. In ullamcorper sodales mauris, sit amet posuere tortor.
         </Grid>
-        <Grid xs={5}>
-           <ImageList >
+        <Grid>
+           <ImageList>
             {photo.map((item) => (
-              <ImageListItem key={item.img} sx={{width: 300,height: 300}}>
+              <ImageListItem key={item.img} sx={{width: 300}}>
                 <img
                   src={`${item.img}`}        
-                  alt={item.title}
-                  
+                  alt={item.title}        
                 />
               </ImageListItem>
             ))}
           </ImageList>  
         </Grid>
       </Grid> 
-    </Box>
+      <Box alignItems="stretch" sx={{backgroundColor: 'black', color: 'white', p: 4}}>
+        <h4>Kontakt</h4>
+      </Box>
   </> 
   );   };
