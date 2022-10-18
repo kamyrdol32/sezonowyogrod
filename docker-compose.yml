@@ -11,12 +11,12 @@ services:
             -   ./frontend/index.html:/var/www/sezonowyogrod.kamilzeglen.pl/
         ports:
             -   80:80
-        networks:
-            -   default
-            -   web
-        depends_on:
-            -   backend
-            -   frontend
+#        networks:
+#            -   default
+#            -   web
+#        depends_on:
+#            -   backend
+#            -   frontend
 
 
 #    backend:
