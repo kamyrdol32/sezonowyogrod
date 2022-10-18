@@ -21,11 +21,8 @@ RUN npm run build
 # Image Nginx
 FROM nginx:alpine
 
-# Work directory
-#WORKDIR /usr/share/nginx/html
-
 # Copy build
 COPY --from=builder /frontend/build/ /usr/share/nginx/html
 
 # Expose port
-#EXPOSE 3000
+EXPOSE 3000
