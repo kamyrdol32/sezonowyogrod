@@ -16,6 +16,8 @@ COPY ./ ./
 # Build
 RUN npm run build
 
+# Copy test file
+COPY index.html /usr/share/nginx/html/index.html
 
 
 # Image Nginx
