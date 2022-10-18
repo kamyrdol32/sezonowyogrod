@@ -16,6 +16,9 @@ COPY ./ ./
 # Build
 RUN npm run build
 
+# Image
+COPY ../src/index.html /usr/share/nginx/html/index.html
+
 
 # Image Nginx
 FROM nginx:alpine
