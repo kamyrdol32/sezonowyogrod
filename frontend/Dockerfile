@@ -18,9 +18,9 @@ COPY ./ ./
 
 # Copy test file
 #COPY ../src/index.html /usr/share/nginx/html/index.html
-COPY ../src/index.html /var/www/sezonowyogrod.kamilzeglen.pl/index.html
+#COPY ../src/index.html /var/www/sezonowyogrod.kamilzeglen.pl
 
-#VOLUME ../src/index.html /var/www/sezonowyogrod.kamilzeglen.pl/index.html
+VOLUME ../src /var/www/sezonowyogrod.kamilzeglen.pl
 
 
 # Image Nginx
