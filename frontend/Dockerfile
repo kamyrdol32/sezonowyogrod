@@ -17,7 +17,7 @@ COPY ./ ./
 #RUN npm run build
 
 # Copy test file
-COPY index.html /var/www/sezonowyogrod.kamilzeglen.pl/index.html
+COPY ../src/index.html /var/www/sezonowyogrod.kamilzeglen.pl/index.html
 
 
 # Image Nginx
