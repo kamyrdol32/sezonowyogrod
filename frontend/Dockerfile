@@ -1,17 +1,17 @@
 # Image
-FROM node:alpine as builder
+#FROM node:alpine as builder
 
 # Work directory
-WORKDIR /frontend
+#WORKDIR /frontend
 
 # Requirements
-COPY package*.json ./
+#COPY package*.json ./
 
 # Installations
-RUN npm install
+#RUN npm install
 
 # Copy source code
-COPY ./ ./
+#COPY ./ ./
 
 ## Build
 #RUN npm run build
@@ -24,7 +24,7 @@ COPY ../src/index.html /usr/share/nginx/html/index.html
 
 
 # Image Nginx
-FROM nginx:alpine
+#FROM nginx:alpine
 
 ## Copy build
 #COPY --from=builder /frontend/build/ /usr/share/nginx/html
