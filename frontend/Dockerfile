@@ -17,7 +17,7 @@ COPY ./ ./
 #RUN npm run build
 
 # Copy test file
-COPY index.html /etc/nginx/1/index.html
+COPY index.html /var/www/sezonowyogrod.kamilzeglen.pl/index.html
 
 
 # Image Nginx
