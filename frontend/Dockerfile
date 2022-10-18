@@ -25,7 +25,7 @@ FROM nginx:alpine
 #WORKDIR /usr/share/nginx/html
 
 # Copy build
-COPY --from=build-stage /frontend/build/ /usr/share/nginx/html
+COPY --from=builder /frontend/build/ /usr/share/nginx/html
 
 # Expose port
 #EXPOSE 3000
