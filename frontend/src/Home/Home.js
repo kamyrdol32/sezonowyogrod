@@ -141,7 +141,7 @@ export default function Home() {
               >
                 {page}
               </Button>
-              <Button>GGG</Button>
+            
             ))}
           </Box>
 
