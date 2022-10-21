@@ -1,8 +1,6 @@
-#my-map-canvas img.text-marker
-
-{
-    max-width:  none!important;
-    background: none!important;
+#google_map {
+    width: 500px;
+    height: 300px;
 }
 
 img
@@ -12,8 +10,8 @@ img
 
 a
 {
-text-decoration: none;
-color: white;
+    text-decoration: none;
+    color: white;
 }
 
 h1
@@ -23,10 +21,3 @@ h1
     text-align: center;
 }
 
-footer
-{
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
