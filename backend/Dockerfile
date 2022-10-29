@@ -20,4 +20,5 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Run
-CMD ["gunicorn", "--bind", "0.0.0.0:5001", "core:app"]
+CMD ["flask", "run"]
+#CMD ["gunicorn", "--bind", "0.0.0.0:5001", "core:app"]
