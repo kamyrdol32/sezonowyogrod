@@ -13,17 +13,25 @@ RUN npm install
 # Copy source code
 COPY ./ ./
 
-# Build
-RUN npm run build
+# Run
+CMD ["npm", "start"]
 
 
-# Image Nginx
-FROM nginx:alpine
 
-# Copy build
-COPY --from=builder /frontend/build /usr/share/nginx/html
 
-# Expose port
-EXPOSE 3000 80
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+## Build
+#RUN npm run build
+#
+#
+## Image Nginx
+#FROM nginx:alpine
+#
+## Copy build
+#COPY --from=builder /frontend/build /usr/share/nginx/html
+#
+## Expose port
+#EXPOSE 3000 80
+#
+#ENTRYPOINT ["nginx", "-g", "daemon off;"]
