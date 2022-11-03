@@ -21,4 +21,9 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy build
-COPY --from=builder /frontend/build/ /usr/share/nginx/html
+COPY --from=builder /frontend/build /usr/share/nginx/html
+
+# Expose port
+EXPOSE 3000 80
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
