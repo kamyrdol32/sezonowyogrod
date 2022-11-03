@@ -13,6 +13,8 @@ services:
         networks:
             -   nginx_network
             -   sezonowyogrod_network
+        volumes:
+            -   /usr/share/nginx/html
 
 
     sezonowyogrod-backend:
