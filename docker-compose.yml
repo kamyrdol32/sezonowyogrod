@@ -16,9 +16,9 @@ services:
 #        volumes:
 #            -   /usr/share/nginx/html
 
-    portfolio-nginx:
+    sezonowyogrod-nginx:
         image: nginx:alpine
-        container_name: portfolio-nginx
+        container_name: sezonowyogrod-nginx
         restart: unless-stopped
         ports:
                 -   "80:80"
