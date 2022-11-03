@@ -2,31 +2,20 @@ version: "3.8"
 
 services:
 
-#    sezonowyogrod-frontend:
-#        build:
-#            context: ./frontend
-#            dockerfile: Dockerfile
-#        container_name: sezonowyogrod-frontend
-#        restart: unless-stopped
-#        ports:
-#            -   "3000:3000"
-#        networks:
-#            -   nginx_network
-#            -   sezonowyogrod_network
-#        volumes:
-#            -   /usr/share/nginx/html
-
-    sezonowyogrod-nginx:
-        image: nginx:alpine
-        container_name: sezonowyogrod-nginx
+    sezonowyogrod-frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        container_name: sezonowyogrod-frontend
         restart: unless-stopped
         ports:
-                -   "80:80"
+            -   "3000:3000"
         networks:
             -   nginx_network
             -   sezonowyogrod_network
         volumes:
-            -   ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+            -   /usr/share/nginx/html
+
 
     sezonowyogrod-backend:
         build:
