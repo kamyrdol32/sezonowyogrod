@@ -15,17 +15,17 @@ services:
             -   sezonowyogrod_network
 
 
-    sezonowyogrod-backend:
-        build:
-            context: backend
-            dockerfile: Dockerfile
-        container_name: sezonowyogrod-backend
-        restart: unless-stopped
-        ports:
-            -   "5001:5001"
-        networks:
-            - nginx_network
-            - sezonowyogrod_network
+#    sezonowyogrod-backend:
+#        build:
+#            context: backend
+#            dockerfile: Dockerfile
+#        container_name: sezonowyogrod-backend
+#        restart: unless-stopped
+#        ports:
+#            -   "5001:5001"
+#        networks:
+#            - nginx_network
+#            - sezonowyogrod_network
 
 
 networks:
