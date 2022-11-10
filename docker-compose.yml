@@ -2,46 +2,33 @@ version: "3.8"
 
 services:
 
-
-    nginx:
+    sezonowyogrod-frontend:
         build:
             context: ./frontend
             dockerfile: Dockerfile
+        container_name: sezonowyogrod-frontend
         restart: unless-stopped
-        volumes:
-            -   ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
-            -   80:80
+            -   "80:80"
         networks:
-            -   default
-            -   web
-        depends_on:
-            -   backend
-#            -   frontend
+            -   nginx_network
+            -   sezonowyogrod_network
 
 
-    backend:
+    sezonowyogrod-backend:
         build:
             context: backend
             dockerfile: Dockerfile
-        container_name: backend
+        container_name: sezonowyogrod-backend
+        restart: unless-stopped
+        ports:
+            -   "5001:5001"
         networks:
-            web:
-                aliases:
-                    -   backend
-
-
-#    frontend:
-#        build:
-#            context: ./frontend
-#            dockerfile: Dockerfile
-#        container_name: frontend
-#        networks:
-#            web:
-#                aliases:
-#                    -   frontend
-#        stdin_open: true
+            - nginx_network
+            - sezonowyogrod_network
 
 
 networks:
-    web:
+    nginx_network:
+        external: true
+    sezonowyogrod_network:
