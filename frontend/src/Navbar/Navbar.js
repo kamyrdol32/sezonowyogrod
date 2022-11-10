@@ -151,7 +151,10 @@ export default function Navbar() {
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
+                            <NavLink to="/auth" key="Auth"> <Button>Logowanie</Button></NavLink>
                             <Tooltip title="Open settings">
+                               
+                               
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2}}>
                                     <Avatar alt="Remy Sharp" />
                                 </IconButton>

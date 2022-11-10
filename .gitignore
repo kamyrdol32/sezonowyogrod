@@ -1,11 +1,11 @@
 /venv/
 
 ### Backend
+!/backend/config.py
 
 
 
 ### Frontend
-
 # dependencies
 /frontend/node_modules
 /frontend/.pnp
