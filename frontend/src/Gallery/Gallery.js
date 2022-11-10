@@ -3,13 +3,13 @@ import './Gallery.css';
 
 // Imports
 
-
+import { ImageList, ImageListItem } from '@mui/material';
 
 // Code
 export default function Gallery() {
     return (
         <>
-            <ImageList
+            {/* <ImageList
                 sx={{ width: 500, height: 450 }}
                 variant="quilted"
                 cols={4}
@@ -24,8 +24,8 @@ export default function Gallery() {
             />
             </ImageListItem>
             ))}
-            </ImageList>
-            
+            </ImageList> */}
+
               <h1 sx={{mb:'100px'}}>Gallery</h1>
           
 

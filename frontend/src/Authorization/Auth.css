@@ -1,6 +1,13 @@
-#container 
+
+#Box_menu
 {
-    background-color: pink;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Box_auth
+{
     width: 80%;
-    
+    background-color: pink;
+    text-align: center;
 }
