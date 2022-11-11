@@ -3,7 +3,6 @@ import './Gallery.css';
 
 // Imports
 
-import { ImageList, ImageListItem } from '@mui/material';
 
 // Code
 export default function Gallery() {
@@ -30,15 +29,15 @@ export default function Gallery() {
           
 
               
-                    <img width={300} src="Images\jay-wennington-N_Y88TWmGwA-unsplash.jpg"/> 
-                    <img width={300} src="Images\louis-hansel-CZiwTf4rfHY-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\jay-wennington-N_Y88TWmGwA-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\louis-hansel-CZiwTf4rfHY-unsplash.jpg"/>
               
            
-                    <img width={300} src="Images\ciel-dKxGVeb3F2w-unsplash.jpg"/>
-                    <img width={300} src="Images\mgg-vitchakorn-DDn9I5V1ubE-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\ciel-dKxGVeb3F2w-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\mgg-vitchakorn-DDn9I5V1ubE-unsplash.jpg"/>
                     
               
-                <img width={300} src="Images\pirata-studio-film-qt6b5042lrw-unsplash.jpg"/>
+                <img width={300} alt="TEST" src="Images\pirata-studio-film-qt6b5042lrw-unsplash.jpg"/>
               
             
         </>
