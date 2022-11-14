@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from core import db
 
 
@@ -7,6 +9,7 @@ class User(db.Model):
     Email = db.Column(db.String(128), unique=True, nullable=False)
     Username = db.Column(db.String(128), unique=True, nullable=False)
     Password = db.Column(db.String(128), nullable=False)
+    CreatedData = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __init__(self, Email, Username, Password):
         self.Email = Email

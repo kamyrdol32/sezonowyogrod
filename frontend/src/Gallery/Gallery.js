@@ -4,12 +4,11 @@ import './Gallery.css';
 // Imports
 
 
-
 // Code
 export default function Gallery() {
     return (
         <>
-            <ImageList
+            {/* <ImageList
                 sx={{ width: 500, height: 450 }}
                 variant="quilted"
                 cols={4}
@@ -24,21 +23,21 @@ export default function Gallery() {
             />
             </ImageListItem>
             ))}
-            </ImageList>
-            
+            </ImageList> */}
+
               <h1 sx={{mb:'100px'}}>Gallery</h1>
           
 
               
-                    <img width={300} src="Images\jay-wennington-N_Y88TWmGwA-unsplash.jpg"/> 
-                    <img width={300} src="Images\louis-hansel-CZiwTf4rfHY-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\jay-wennington-N_Y88TWmGwA-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\louis-hansel-CZiwTf4rfHY-unsplash.jpg"/>
               
            
-                    <img width={300} src="Images\ciel-dKxGVeb3F2w-unsplash.jpg"/>
-                    <img width={300} src="Images\mgg-vitchakorn-DDn9I5V1ubE-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\ciel-dKxGVeb3F2w-unsplash.jpg"/>
+                    <img width={300} alt="TEST" src="Images\mgg-vitchakorn-DDn9I5V1ubE-unsplash.jpg"/>
                     
               
-                <img width={300} src="Images\pirata-studio-film-qt6b5042lrw-unsplash.jpg"/>
+                <img width={300} alt="TEST" src="Images\pirata-studio-film-qt6b5042lrw-unsplash.jpg"/>
               
             
         </>

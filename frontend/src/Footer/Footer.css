@@ -4,4 +4,7 @@ footer
     color: white;
     text-align: center;
     padding: 10px;
+    top: 100%;
+    position: sticky;
+    bottom: 0;
 }

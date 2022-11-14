@@ -10,21 +10,28 @@ import Auth from './Authorization/Auth';
 
 
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
+
+// Create a client
+const queryClient = new QueryClient()
 
 // Code
 function App() {
 
     return (
-        <BrowserRouter>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/auth" element={<Auth />} />
-                
-            </Routes>
-            <Footer />
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Navbar />
+                <div id="site">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/auth" element={<Auth />} />
+                    </Routes>
+                </div>
+                <Footer />
+            </BrowserRouter>
+        </QueryClientProvider>
     );
 }
 
