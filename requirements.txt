@@ -2,4 +2,6 @@ Flask~=2.2.2
 Flask-SQLAlchemy~=2.5.1
 
 MySQL~=0.0.3
+
+wheel~=0.37.0
 gunicorn~=20.1.0
