@@ -13,7 +13,6 @@ ENV FLASK_RUN_PORT=5001
 
 # Requirements & Installations
 RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
