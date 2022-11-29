@@ -22,3 +22,6 @@ FROM nginx:alpine
 
 # Copy build
 COPY --from=builder /frontend/build /usr/share/nginx/html
+
+# Expose port
+EXPOSE 80
