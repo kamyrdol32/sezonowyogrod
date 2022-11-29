@@ -77,7 +77,7 @@ export default function Auth() {
         return response.json()
 	}
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState("");
 
   const [login_username, setLogin_username] = React.useState(0);
   const [login_password, setLogin_password] = React.useState(0);
@@ -86,72 +86,72 @@ export default function Auth() {
   const [register_password, setRegister_password] = React.useState(0);
   const [register_reapet_password, setRegister_reapet_password] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-
-  return (
-    <Box id="Box_menu" sx={{ width: '80%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" mt='15px'>
-          <Tab label="Logowanie" {...a11yProps(0)} />
-          <Tab label="Rejestracja" {...a11yProps(1)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        <Box id="Box_login">
-            <TextField
-                id="register_login"
-                label="Username"
-                variant="outlined"
-                onChange={event => setLogin_username(event.target.value)}
-            />
-            <TextField
-                id="register_password"
-                label="Password"
-                variant="outlined"
-                onChange={event => setLogin_password(event.target.value)}
-            />
-           <Button variant="outlined" onClick={fetchLoginPanel}>Zaloguj</Button>
-        </Box>
-      </TabPanel>
-        <TabPanel value={value} index={1}>
-        <Box id="Box_register">
-            <h2>Rejestracja</h2>
-            <TextField sx={{mt:'10%'}}
-                className='reg'
-                id="register_login"
-                label="Username"
-                variant="outlined"
-                onChange={event => setRegister_username(event.target.value)}
-            />
-            <TextField
-                className='reg'
-                id="register_password"
-                label="E-Mail"
-                variant="outlined"
-                onChange={event => setRegister_email(event.target.value)}
-            />
-            <TextField
-                className='reg'
-                id="register_password"
-                label="Password"
-                variant="outlined"
-                onChange={event => setRegister_password(event.target.value)}
-            />
-            <TextField
-                className='reg'
-                id="register_password"
-                label="Repeat password"
-                variant="outlined"
-                onChange={event => setRegister_reapet_password(event.target.value)}
-            /> 
-            <br />
-           <Button id="button_rej" variant="outlined" onClick={fetchRegisterPanel}>Zarejestruj</Button>
-        </Box>
-      </TabPanel>
   
-    </Box>
-  );
+
+ 
+let rejestracja = (
+  <Box id="Box_auth">
+  <TextField
+      id="register_login"
+      label="Username"
+      variant="outlined"
+      onChange={event => setRegister_username(event.target.value)}
+  />
+  <TextField
+      id="register_password"
+      label="E-Mail"
+      variant="outlined"
+      onChange={event => setRegister_email(event.target.value)}
+  />
+  <TextField
+      id="register_password"
+      label="Password"
+      variant="outlined"
+      onChange={event => setRegister_password(event.target.value)}
+  />
+  <TextField
+      id="register_password"
+      label="Repeat password"
+      variant="outlined"
+      onChange={event => setRegister_reapet_password(event.target.value)}
+  />
+   <Button variant="outlined" onClick={fetchRegisterPanel}>Zarejestruj</Button>
+  </Box>
+);
+
+let logowanie = (
+  <Box id="Box_auth">
+    <TextField
+      id="register_login"
+      label="Username"
+      variant="outlined"
+      onChange={event => setLogin_username(event.target.value)}
+    />
+    <TextField
+      id="register_password"
+      label="Password"
+      variant="outlined"
+      onChange={event => setLogin_password(event.target.value)}
+    />
+    <Button variant="outlined" onClick={fetchLoginPanel}>Zaloguj</Button>
+  </Box>
+);
+
+return(
+  <>
+  <Button variant="text" onClick={() => {setValue("Rejestracja")}}>Rejestracja</Button>
+  <Button variant="text" onClick={() => {setValue("Logowanie")}}>Logowanie</Button>
+  
+  {value === "Rejestracja" ? 
+  (
+    rejestracja
+  )
+  :
+  (
+    logowanie
+  )
+}
+  </>
+
+);
 }
