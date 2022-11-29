@@ -3,11 +3,35 @@
 {
     margin-left: auto;
     margin-right: auto;
+    width: 70%;
+    
+}
+#Box_login
+{
+    background-color: blueviolet;
 }
 
-#Box_auth
+#Box_register
 {
-    width: 80%;
-    background-color: pink;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
     text-align: center;
+    max-width: 800px;
+    padding-top: 40px;
+    padding-bottom: 50px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    background-color: #DCDCDC;
+}
+
+.reg
+{
+    width: 70%;
+}
+
+
+#button_rej
+{
+    margin-top: 30px;
 }

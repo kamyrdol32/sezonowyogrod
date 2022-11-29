@@ -7,4 +7,5 @@ footer
     top: 100%;
     position: sticky;
     bottom: 0;
+    clear: both;
 }

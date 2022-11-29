@@ -1,5 +1,5 @@
 // CSS
-
+import './Auth.css';
 // Imports
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -94,13 +94,13 @@ export default function Auth() {
   return (
     <Box id="Box_menu" sx={{ width: '80%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" mt='15px'>
           <Tab label="Logowanie" {...a11yProps(0)} />
           <Tab label="Rejestracja" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Box id="Box_auth">
+        <Box id="Box_login">
             <TextField
                 id="register_login"
                 label="Username"
@@ -117,32 +117,38 @@ export default function Auth() {
         </Box>
       </TabPanel>
         <TabPanel value={value} index={1}>
-        <Box id="Box_auth">
-            <TextField
+        <Box id="Box_register">
+            <h2>Rejestracja</h2>
+            <TextField sx={{mt:'10%'}}
+                className='reg'
                 id="register_login"
                 label="Username"
                 variant="outlined"
                 onChange={event => setRegister_username(event.target.value)}
             />
             <TextField
+                className='reg'
                 id="register_password"
                 label="E-Mail"
                 variant="outlined"
                 onChange={event => setRegister_email(event.target.value)}
             />
             <TextField
+                className='reg'
                 id="register_password"
                 label="Password"
                 variant="outlined"
                 onChange={event => setRegister_password(event.target.value)}
             />
             <TextField
+                className='reg'
                 id="register_password"
                 label="Repeat password"
                 variant="outlined"
                 onChange={event => setRegister_reapet_password(event.target.value)}
-            />
-           <Button variant="outlined" onClick={fetchRegisterPanel}>Zarejestruj</Button>
+            /> 
+            <br />
+           <Button id="button_rej" variant="outlined" onClick={fetchRegisterPanel}>Zarejestruj</Button>
         </Box>
       </TabPanel>
   
