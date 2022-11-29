@@ -1,8 +1,6 @@
 from flask import Blueprint, request, jsonify
 
 import core
-import models
-import others
 
 auth_blueprint = Blueprint('auth', __name__)
 
@@ -17,11 +15,11 @@ def login():
     if not password:
         return jsonify({"msg": "Missing password parameter"}), 400
 
-    user = core.db.session.query(core.User).filter_by(Username=username).first()
+    user = core.db.session.query(core.models.User).filter_by(Username=username).first()
     if user is None:
         return jsonify({"msg": "Bad username or password"}), 401
 
-    if user.Password != others.hash_password(password):
+    if user.Password != core.others.hash_password(password):
         return jsonify({"msg": "Bad username or password"}), 401
 
     return jsonify({"msg": "Logged in successfully"}), 200
@@ -48,11 +46,11 @@ def register():
     if password != reapet_password:
         return jsonify({"msg": "Passwords do not match"}), 400
 
-    user = core.db.session.query(models.User).filter_by(Username=username).first()
+    user = core.db.session.query(core.models.User).filter_by(Username=username).first()
     if user is not None:
         return jsonify({"msg": "User already exists"}), 400
 
-    user = models.User(Email=email, Username=username, Password=others.hash_password(password))
+    user = core.models.User(Email=email, Username=username, Password=core.others.hash_password(password))
     core.db.session.add(user)
     core.db.session.commit()
 

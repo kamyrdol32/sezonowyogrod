@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import models
 import api
 import auth
+import others
 
 app = Flask(__name__)
 app.config.from_object('config')
