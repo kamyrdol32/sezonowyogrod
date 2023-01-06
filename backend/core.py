@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
 
 import models
 import api
@@ -14,6 +15,7 @@ app.register_blueprint(auth.auth_blueprint, url_prefix='/auth')
 
 db = SQLAlchemy()
 db.init_app(app)
+jwt = JWTManager(app)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

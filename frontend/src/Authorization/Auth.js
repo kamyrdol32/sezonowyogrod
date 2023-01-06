@@ -51,14 +51,17 @@ export default function Auth() {
 		const response = await fetch('/auth/login', {
 			method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 username: login_username,
                 password: login_password
             })
 		})
-        return response.json()
+        const data = await response.json();
+        if (response.status === 200) {
+            console.log(data.access_token);
+        }
 	}
 
     async function fetchRegisterPanel() {
