@@ -2,22 +2,21 @@
 import './App.css';
 
 // Imports
+import React from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
+
+// Components
 import Home from './Home/Home.js';
+import Auth from './Authorization/Auth';
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import Gallery from "./Gallery/Gallery";
-import Auth from './Authorization/Auth';
-
-
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
-import { ToastContainer, toast } from 'react-toastify';
 import Reservation from "./Reservation/Reservation";
 
-// Create a client
+// Code
 const queryClient = new QueryClient()
 
-// Code
 function App() {
 
     return (

@@ -1,5 +1,6 @@
 // CSS
 import './Auth.css';
+
 // Imports
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -9,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import {redirect} from "react-router";
+import axios from "axios";
+import {axios_post} from "../Others/requests";
 
 
 // Code
@@ -48,36 +52,25 @@ function a11yProps(index) {
 export default function Auth() {
 
     async function fetchLoginPanel() {
-		const response = await fetch('/auth/login', {
-			method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: login_username,
-                password: login_password
-            })
-		})
-        const data = await response.json();
-        if (response.status === 200) {
-            console.log(data.access_token);
+
+        const data = {
+            username: login_username,
+            password: login_password,
         }
+
+		await axios_post('/auth/login', data, false);
 	}
 
     async function fetchRegisterPanel() {
-		const response = await fetch('/auth/register', {
-			method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: register_username,
-                email: register_email,
-                password: register_password,
-                reapet_password: register_reapet_password
-            })
-		})
-        return response.json()
+
+        const data = {
+            username: register_username,
+            email: register_email,
+            password: register_password,
+            reapet_password: register_reapet_password
+        }
+
+		await axios_post('/auth/register', data, false);
 	}
 
   const [value, setValue] = React.useState(0);

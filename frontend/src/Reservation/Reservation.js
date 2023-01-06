@@ -7,6 +7,9 @@ import * as React from 'react';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from "@mui/material/MenuItem";
 import {InputLabel, Select} from "@mui/material";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {axios_post} from "../Others/requests";
 
 
 // Code
@@ -14,6 +17,10 @@ export default function Reservation(){
 
     let Day = new Date().getDate();
     let Hour = new Date().getHours()
+    let Minute = new Date().getMinutes()
+    if (Minute !== 0) {
+        Hour += 1
+    }
     if (Hour%2 === 1) {
         Hour = Hour + 1
     }
@@ -25,38 +32,38 @@ export default function Reservation(){
         Day = new Date().getDate() + 1
     }
 
-    // 2023-01-12
+    const navigate = useNavigate();
+
     const [date, setDate] = React.useState(new Date(new Date().getFullYear(), new Date().getMonth(), Day + 1).toISOString().slice(0, 10));
     const [hour, setHour] = React.useState(Hour);
     const [people, setPeople] = React.useState(2);
 
-    console.log(Hour)
-    console.log(Day)
+    // console.log(Hour)
+    // console.log(Day)
+
+
 
     async function fetch_reservesion_data(Table_ID) {
-		const response = await fetch('/api/reservation/add', {
-			method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                table_id: Table_ID,
-                user_id: 1,
-                date: date,
-                hour: hour,
-                peoples: people,
-            })
-		})
-        const data = await response.json();
-        if (response.status === 200) {
-            console.log(data.access_token);
-        }
-	}
 
-    function make_reservation(ID){
-        fetch_reservesion_data(ID)
-        console.log("reservation: " + ID);
-    }
+        const data = {
+            table_id: Table_ID,
+            user_id: 1,
+            date: date,
+            hour: hour,
+            peoples: people,
+        }
+
+        axios_post('/api/reservation/add', data, true)
+            .then((response) => {
+                console.log(response.data.msg)
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    navigate('/auth')
+                }
+                console.log(error)
+            })
+	}
 
 
 
@@ -89,11 +96,11 @@ export default function Reservation(){
 
             <h1>Rezerwacja</h1>
             <div className="chair"></div>
-            <div className="table" onClick={() => {make_reservation(1)}}></div>
+            <div className="table" onClick={() => {fetch_reservesion_data(1)}}></div>
             <div className="chair"></div>
             <br/>
             <div className="chair"></div>
-            <div className="table" onClick={() => {make_reservation(2)}}></div>
+            <div className="table" onClick={() => {fetch_reservesion_data(2)}}></div>
             <div className="chair"></div>
         </div>
     );

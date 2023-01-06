@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 import core
 
@@ -12,7 +13,13 @@ def create_db():
 
 
 @api_blueprint.route('/reservation/add', methods=['POST'])
+@jwt_required()
 def add_reservation():
+    username = get_jwt_identity()
+    print(username)
+
+    print(get_jwt()["exp"])
+
     table_id = request.json.get("table_id", None)
     user_id = request.json.get("user_id", None)
     date = request.json.get("date", None)
