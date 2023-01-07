@@ -3,8 +3,16 @@ import axios from "axios";
 import {getCookie} from "./token";
 
 // Code
-function axios_get(url, data, headers) {
+export function axios_get(url, data) {
 
+    let headers = {
+        'Content-Type': 'application/json',
+    }
+
+    return axios.get(url, {
+        headers: headers,
+        params: data,
+    })
 }
 
 export function axios_post(url, data, tokenRequired) {

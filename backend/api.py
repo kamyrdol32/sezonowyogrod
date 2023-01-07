@@ -15,13 +15,11 @@ def create_db():
 @api_blueprint.route('/reservation/add', methods=['POST'])
 @jwt_required()
 def add_reservation():
-    username = get_jwt_identity()
-    print(username)
 
-    print(get_jwt()["exp"])
+    username = get_jwt_identity()
+    user_id = core.models.User.query.filter_by(Username=username).first().ID
 
     table_id = request.json.get("table_id", None)
-    user_id = request.json.get("user_id", None)
     date = request.json.get("date", None)
     hour = request.json.get("hour", None)
     peoples = request.json.get("peoples", None)
@@ -48,16 +46,21 @@ def add_reservation():
     core.db.session.add(reservation)
     core.db.session.commit()
 
-    print("Udalo sie")
+    print("[INFO] Reservation added successfully")
     return jsonify({"msg": "Reservation added successfully"}), 200
 
 
 @api_blueprint.route('/reservation/get', methods=['POST'])
 def get_reservation():
-    reservations = core.models.Reservation.query.all()
-    reservations_list = []
 
-    for reservation in reservations:
-        reservations_list.append(reservation.serialize())
+    date = request.json.get("date", None)
+    hour = request.json.get("hour", None)
+    peoples = request.json.get("peoples", None)
 
-    return jsonify(reservations_list), 200
+    Table = []
+    Reservations = core.models.Reservation.query.all()
+
+    for Reservation in Reservations:
+        print(Reservation.User_ID)
+
+    return jsonify(Table), 200
