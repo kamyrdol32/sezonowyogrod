@@ -18,7 +18,6 @@ export default function Reservation(){
 
     const navigate = useNavigate();
 
-
     // Variables & States
     let Day = new Date().getDate();
     let Hour = new Date().getHours()
@@ -65,25 +64,31 @@ export default function Reservation(){
             })
 	}
 
-    async function fetchTables() {
+    async function fetchTables(date, hour, people) {
 
-        axios_get('/api/reservation/get')
+        const data = {
+            date: date,
+            hour: hour,
+            peoples: people,
+        }
+
+        console.log("fetching tables")
+        axios_post("/api/reservation/get", data, true)
             .then((response) => {
-                return response.data
+                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error)
-            }
-        )
+            })
     }
 
     // Render
     return (
         <div>
             <FormControl>
-                <TextField type="date" value={date} onChange={(event) => setDate(event.target.value)}/>
+                <TextField type="date" value={date} onChange={(event) => {setDate(event.target.value); fetchTables(event.target.value, hour, people)}}/>
 
-                <Select defaultValue={hour} label="Hour" onChange={(event) => {setHour(event.target.value)}}>
+                <Select defaultValue={hour} label="Hour" onChange={(event) => {setHour(event.target.value); fetchTables(date, event.target.value, people)}}>
                     <MenuItem value={12}>12:00 - 14:00</MenuItem>
                     <MenuItem value={14}>14:00 - 16:00</MenuItem>
                     <MenuItem value={16}>16:00 - 18:00</MenuItem>
@@ -91,7 +96,7 @@ export default function Reservation(){
                     <MenuItem value={20}>20:00 - 22:00</MenuItem>
                 </Select>
 
-                <Select defaultValue={people} label="People" onChange={(event) => {setPeople(event.target.value)}}>
+                <Select defaultValue={people} label="People" onChange={(event) => {setPeople(event.target.value); fetchTables(date, hour, event.target.value)}}>
                     <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
                     <MenuItem value={3}>3</MenuItem>

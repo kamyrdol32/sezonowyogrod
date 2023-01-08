@@ -51,16 +51,35 @@ def add_reservation():
 
 
 @api_blueprint.route('/reservation/get', methods=['POST'])
+@jwt_required()
 def get_reservation():
+
+    Data = []
 
     date = request.json.get("date", None)
     hour = request.json.get("hour", None)
     peoples = request.json.get("peoples", None)
 
-    Table = []
-    Reservations = core.models.Reservation.query.all()
+    start_date = date + " " + str(hour) + ":00:00"
+    end_date = date + " " + str(hour + 2) + ":00:00"
 
-    for Reservation in Reservations:
-        print(Reservation.User_ID)
+    Reservations = core.models.Reservation.query.filter(core.models.Reservation.Start_Date == start_date, core.models.Reservation.End_Date == end_date).all()
+    AllTables = core.models.Table.query.all()
+    Chairs = core.models.Table.query.all()
 
-    return jsonify(Table), 200
+    if peoples%2 == 1:
+        peoples += 1
+
+    for Table in AllTables:
+        Status = True
+        for Reservation in Reservations:
+            if Table.ID == Reservation.Table_ID:
+                Status = False
+        for Chair in Chairs:
+            if Chair.Chairs != peoples and Chair.ID == Table.ID:
+                Status = False
+        print("Stolik ID: " + str(Table.ID) + " | Liczba miejsc: " + str(Table.Chairs) + " | Status: " + str(Status))
+        if Status == True:
+            Data.append({"ID": Table.ID, "Chairs": Table.Chairs, "Status": Status})
+
+    return jsonify(Data), 200

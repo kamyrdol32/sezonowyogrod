@@ -70,7 +70,7 @@ export default function Auth() {
             reapet_password: register_reapet_password
         }
 
-		await axios_post('/auth/register', data, false);
+		axios_post('/auth/register', data, false);
 	}
 
   const [value, setValue] = React.useState(0);
