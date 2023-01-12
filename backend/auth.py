@@ -1,6 +1,10 @@
+from datetime import datetime, timezone, timedelta
+
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, set_access_cookies, get_jwt
 
 import core
+import api
 
 auth_blueprint = Blueprint('auth', __name__)
 
@@ -22,7 +26,11 @@ def login():
     if user.Password != core.others.hash_password(password):
         return jsonify({"msg": "Bad username or password"}), 401
 
-    return jsonify({"msg": "Logged in successfully"}), 200
+    # Success - generate access token
+    response = jsonify({"msg": "login successful"})
+    access_token = create_access_token(identity=username)
+    set_access_cookies(response, access_token)
+    return response, 200
 
 @auth_blueprint.route('/register', methods=['POST'])
 def register():
@@ -56,3 +64,28 @@ def register():
 
 
     return jsonify({"msg": "Registered successfully"}), 200
+
+
+@auth_blueprint.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
+
+
+@auth_blueprint.after_request
+@api.api_blueprint.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            set_access_cookies(response, access_token)
+        return response
+    except (RuntimeError, KeyError):
+        # Case where there is not a valid JWT. Just return the original response
+        return response

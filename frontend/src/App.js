@@ -2,20 +2,21 @@
 import './App.css';
 
 // Imports
-import Home from './Home/Home.js';
-import Navbar from "./Navbar/Navbar";
-import Footer from "./Footer/Footer";
-import Gallery from "./Gallery/Gallery";
-import Auth from './Authorization/Auth';
-
-
+import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
 
-// Create a client
-const queryClient = new QueryClient()
+// Components
+import Home from './Home/Home.js';
+import Auth from './Authorization/Auth';
+import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
+import Gallery from "./Gallery/Gallery";
+import Reservation from "./Reservation/Reservation";
 
 // Code
+const queryClient = new QueryClient()
+
 function App() {
 
     return (
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/gallery" element={<Gallery />} />
                         <Route path="/auth" element={<Auth />} />
+                        <Route path="/reservation" element={<Reservation />} />
                     </Routes>
                 </div>
                 <Footer />
