@@ -4,12 +4,11 @@ import './Reservation.css';
 
 // Imports
 import * as React from 'react';
-import FormControl from '@mui/material/FormControl';
 import MenuItem from "@mui/material/MenuItem";
 import {useNavigate} from "react-router-dom";
 import {axios_post} from "../Others/requests";
 import TextField from "@mui/material/TextField";
-import {Select} from "@mui/material";
+import {FormGroup, Select} from "@mui/material";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import Loader from "../Others/Loader";
 import Button from "@mui/material/Button";
@@ -46,10 +45,8 @@ export default function Reservation(){
     const [selected, setSelected] = React.useState(0);
     const [tables, setTables] = React.useState([]);
 
-    const {data, isLoading} = useQuery(['Tables'], () => {
-        fetchTables(date, hour, people).then((response) => {
-            return response.json();
-        })
+    const {isLoading} = useQuery(['Tables'], () => {
+        fetchTables(date, hour, people)
     })
 
 
@@ -88,7 +85,7 @@ export default function Reservation(){
             peoples: people,
         }
 
-        const data = axios_post("/api/reservation/get", dataTable, true)
+        return axios_post("/api/reservation/get", dataTable, true)
             .then((response) => {
                 setTables(response.data)
                 return response.data
@@ -99,7 +96,6 @@ export default function Reservation(){
                 }
                 console.log(error)
             })
-        return data
     }
     
     // Functions
@@ -128,7 +124,7 @@ export default function Reservation(){
 
     return (
         <div>
-            <FormControl>
+            <FormGroup>
                 <TextField type="date" value={date} onChange={(event) => {setDate(event.target.value); fetchTables(event.target.value, hour, people)}}/>
 
                 <Select defaultValue={hour} label="Hour" onChange={(event) => {setHour(event.target.value); fetchTables(date, event.target.value, people)}}>
@@ -147,13 +143,13 @@ export default function Reservation(){
                     <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={6}>6</MenuItem>
                 </Select>
-            </FormControl>
+            </FormGroup>
 
 
             <h1>Rezerwacja</h1>
 
             {tables.map((table) => (
-                <div id={table.ID} className={"table " + table.CSS_Class} onClick={() => setSelect(table.ID)}></div>
+                <div id={table.ID} key={table.ID} className={"table " + table.CSS_Class} onClick={() => setSelect(table.ID)}></div>
             ))}
             <Button variant="contained" onClick={() => {make_reservation(selected)}}>Rezerwuj</Button>
         </div>
