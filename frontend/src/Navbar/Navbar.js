@@ -1,6 +1,6 @@
 // Imports
 import './Navbar.css';
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,7 +14,6 @@ import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import {NavLink} from "react-router-dom";
 import {getCookie} from "../Others/token";
-import jwt_decode from "jwt-decode";
 import {Avatar, Tooltip} from "@mui/material";
 
 // Code
