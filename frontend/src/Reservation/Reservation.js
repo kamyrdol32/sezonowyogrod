@@ -7,16 +7,19 @@ import * as React from 'react';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from "@mui/material/MenuItem";
 import {useNavigate} from "react-router-dom";
-import {axios_get, axios_post} from "../Others/requests";
+import {axios_post} from "../Others/requests";
 import TextField from "@mui/material/TextField";
 import {Select} from "@mui/material";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import Loader from "../Others/Loader";
+import Button from "@mui/material/Button";
 
 
 // Code
 export default function Reservation(){
 
-
     const navigate = useNavigate();
+    const queryClient = useQueryClient()
 
     // Variables & States
     let Day = new Date().getDate();
@@ -40,6 +43,14 @@ export default function Reservation(){
     const [date, setDate] = React.useState(new Date(new Date().getFullYear(), new Date().getMonth(), Day + 1).toISOString().slice(0, 10));
     const [hour, setHour] = React.useState(Hour);
     const [people, setPeople] = React.useState(2);
+    const [selected, setSelected] = React.useState(0);
+    const [tables, setTables] = React.useState([]);
+
+    const {data, isLoading} = useQuery(['Tables'], () => {
+        fetchTables(date, hour, people).then((response) => {
+            return response.json();
+        })
+    })
 
 
     // API
@@ -55,6 +66,8 @@ export default function Reservation(){
         axios_post('/api/reservation/add', data, true)
             .then((response) => {
                 console.log(response.data.msg)
+                queryClient.invalidateQueries('Comments');
+                setSelected(0)
             })
             .catch((error) => {
                 if (error.response.status === 401) {
@@ -64,25 +77,55 @@ export default function Reservation(){
             })
 	}
 
-    async function fetchTables(date, hour, people) {
 
-        const data = {
+    function fetchTables(date, hour, people) {
+
+        console.log(date, hour, people)
+
+        const dataTable = {
             date: date,
             hour: hour,
             peoples: people,
         }
 
-        console.log("fetching tables")
-        axios_post("/api/reservation/get", data, true)
+        const data = axios_post("/api/reservation/get", dataTable, true)
             .then((response) => {
-                console.log(response.data)
+                setTables(response.data)
+                return response.data
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    navigate('/auth')
+                }
                 console.log(error)
             })
+        return data
+    }
+    
+    // Functions
+    function setSelect(ID) {
+        const element_new = document.getElementById(ID);
+
+
+        if (!element_new.classList.contains('reservated')) {
+            if (selected !== 0) {
+                const element_old = document.getElementById(selected);
+                element_old.classList.remove("selected");
+            }
+
+            setSelected(ID);
+            element_new.classList.add("selected");
+        }
+    }
+    
+    // Render
+    if (isLoading) {
+        return <Loader />
     }
 
-    // Render
+    console.log(tables)
+
+
     return (
         <div>
             <FormControl>
@@ -108,13 +151,11 @@ export default function Reservation(){
 
 
             <h1>Rezerwacja</h1>
-            <div className="chair"></div>
-            <div className="table" onClick={() => {make_reservation(1)}}></div>
-            <div className="chair"></div>
-            <br/>
-            <div className="chair"></div>
-            <div className="table" onClick={() => {make_reservation(2)}}></div>
-            <div className="chair"></div>
+
+            {tables.map((table) => (
+                <div id={table.ID} className={"table " + table.CSS_Class} onClick={() => setSelect(table.ID)}></div>
+            ))}
+            <Button variant="contained" onClick={() => {make_reservation(selected)}}>Rezerwuj</Button>
         </div>
     );
   }
