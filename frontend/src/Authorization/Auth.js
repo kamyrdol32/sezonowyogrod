@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 import {redirect} from "react-router";
 import axios from "axios";
 import {axios_post} from "../Others/requests";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 
 // Code
@@ -51,6 +53,8 @@ function a11yProps(index) {
 
 export default function Auth() {
 
+    const navigate = useNavigate();
+
     async function fetchLoginPanel() {
 
         const data = {
@@ -58,7 +62,13 @@ export default function Auth() {
             password: login_password,
         }
 
-		await axios_post('/auth/login', data, false);
+		await axios_post('/auth/login', data, false)
+            .then((response) => {
+                if (response.status === 200) {
+                    navigate('/')
+                    toast.success('Logged in successfully')
+                }
+            })
 	}
 
     async function fetchRegisterPanel() {

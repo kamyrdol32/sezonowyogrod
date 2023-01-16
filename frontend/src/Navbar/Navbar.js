@@ -1,6 +1,6 @@
 // Imports
 import './Navbar.css';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,10 +11,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import Avatar from "@mui/material/Avatar";
 import AppBar from "@mui/material/AppBar";
 import {NavLink} from "react-router-dom";
+import {getCookie} from "../Others/token";
+import jwt_decode from "jwt-decode";
+import {Avatar, Tooltip} from "@mui/material";
 
 // Code
 export default function Navbar() {
@@ -152,14 +153,20 @@ export default function Navbar() {
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <NavLink to="/auth" key="Auth"> <Button>Logowanie</Button></NavLink>
-                            <Tooltip title="Open settings">
-                               
-                               
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2}}>
-                                    <Avatar alt="Remy Sharp" />
-                                </IconButton>
-                            </Tooltip>
+                            {!getCookie('csrf_access_token') ? (
+                                <NavLink to="/auth" key="Auth"> <Button>Logowanie</Button></NavLink>
+                            ) : (
+                                <>
+                                    <NavLink to="/profile" key="Auth"> <Button>Profile</Button></NavLink>
+                                    <Tooltip title="Open settings">
+
+
+                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2}}>
+                                            <Avatar alt="Remy Sharp" />
+                                        </IconButton>
+                                    </Tooltip>
+                                </>
+                            )}
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"
