@@ -63,7 +63,10 @@ export default function Reservation(){
         axios_post('/api/reservation/add', data, true)
             .then((response) => {
                 console.log(response.data.msg)
-                queryClient.invalidateQueries('Comments');
+                const element = document.getElementById(Table_ID)
+                element.classList.remove('selected')
+                element.classList.add('reserved')
+                queryClient.invalidateQueries('Tables');
                 setSelected(0)
             })
             .catch((error) => {
