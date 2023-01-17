@@ -11,7 +11,7 @@
     background-color: blueviolet;
 }
 
-#Box_register
+#Box_register, #Box_login
 {
     margin-left: auto;
     margin-right: auto;
@@ -25,13 +25,13 @@
     background-color: #DCDCDC;
 }
 
-.reg
+.reg, .log
 {
     width: 70%;
 }
 
 
-#button_rej
+#button_rej, #button_log
 {
     margin-top: 30px;
 }

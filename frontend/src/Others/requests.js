@@ -1,17 +1,26 @@
 // Imports
 import axios from "axios";
-import {getCookie} from "./token";
+import {getCookie, getJWTUsername, removeUsername} from "./token";
+import {toast} from "react-toastify";
+import {useContext} from "react";
+import {usernameContext} from "../App";
 
 // Code
-export function axios_get(url, data) {
+export function axios_get(url, tokenRequired) {
 
     let headers = {
         'Content-Type': 'application/json',
     }
 
+    if (tokenRequired) {
+        headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token'),
+        }
+    }
+
     return axios.get(url, {
         headers: headers,
-        params: data,
     })
 }
 
@@ -28,7 +37,25 @@ export function axios_post(url, data, tokenRequired) {
         }
     }
 
-    return axios.post(url, data, {
+    const postData = axios.post(url, data, {
         headers: headers,
     })
+
+    postData
+        .then(response => {
+            console.log(response)
+            if (response.status === 200 && response.data.token) {
+                localStorage.setItem('username', getJWTUsername(response.data.token))
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            if (error.response.status === 401) {
+                removeUsername()
+                toast.error('You are not logged in')
+            }
+        })
+
+
+    return postData
 }

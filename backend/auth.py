@@ -1,7 +1,8 @@
 from datetime import datetime, timezone, timedelta
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, set_access_cookies, get_jwt
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, set_access_cookies, get_jwt, \
+    unset_jwt_cookies
 
 import core
 import api
@@ -27,8 +28,8 @@ def login():
         return jsonify({"msg": "Bad username or password"}), 401
 
     # Success - generate access token
-    response = jsonify({"msg": "login successful"})
     access_token = create_access_token(identity=username)
+    response = jsonify({"msg": "login successful", "token": access_token})
     set_access_cookies(response, access_token)
     return response, 200
 
@@ -64,6 +65,13 @@ def register():
 
 
     return jsonify({"msg": "Registered successfully"}), 200
+
+@auth_blueprint.route('/logout', methods=['GET'])
+# @jwt_required
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response, 200
 
 
 @auth_blueprint.route("/protected", methods=["GET"])

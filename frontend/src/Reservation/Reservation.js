@@ -5,20 +5,21 @@ import './Reservation.css';
 // Imports
 import * as React from 'react';
 import MenuItem from "@mui/material/MenuItem";
-import {useNavigate} from "react-router-dom";
 import {axios_post} from "../Others/requests";
 import TextField from "@mui/material/TextField";
 import {FormGroup, Select} from "@mui/material";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import Loader from "../Others/Loader";
 import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
+import Grid from "@mui/material/Grid";
 
 
 // Code
 export default function Reservation(){
 
-    const navigate = useNavigate();
     const queryClient = useQueryClient()
+    const navigate = useNavigate()
 
     // Variables & States
     let Day = new Date().getDate();
@@ -69,18 +70,10 @@ export default function Reservation(){
                 queryClient.invalidateQueries('Tables');
                 setSelected(0)
             })
-            .catch((error) => {
-                if (error.response.status === 401) {
-                    navigate('/auth')
-                }
-                console.log(error)
-            })
 	}
 
 
     function fetchTables(date, hour, people) {
-
-        console.log(date, hour, people)
 
         const dataTable = {
             date: date,
@@ -97,7 +90,6 @@ export default function Reservation(){
                 if (error.response.status === 401) {
                     navigate('/auth')
                 }
-                console.log(error)
             })
     }
     
@@ -121,8 +113,6 @@ export default function Reservation(){
     if (isLoading) {
         return <Loader />
     }
-
-    console.log(tables)
 
 
     return (
@@ -152,7 +142,10 @@ export default function Reservation(){
             <h1>Rezerwacja</h1>
 
             {tables.map((table) => (
-                <div id={table.ID} key={table.ID} className={"table " + table.CSS_Class} onClick={() => setSelect(table.ID)}></div>
+                <Grid container>
+                        <div id={table.ID} key={table.ID} className={"table " + table.CSS_Class} onClick={() => setSelect(table.ID)}></div>
+                        <h3>{table.Chairs}</h3>
+                </Grid>
             ))}
             <Button variant="contained" onClick={() => {make_reservation(selected)}}>Rezerwuj</Button>
         </div>

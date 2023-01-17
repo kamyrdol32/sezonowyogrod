@@ -60,10 +60,6 @@ def get_reservation():
     hour = request.json.get("hour", None)
     peoples = request.json.get("peoples", None)
 
-    print(date)
-    print(hour)
-    print(peoples)
-
     start_date = date + " " + str(hour) + ":00:00"
     end_date = date + " " + str(hour + 2) + ":00:00"
 
@@ -84,9 +80,6 @@ def get_reservation():
                 Status = False
 
         CSS_Class = "" if Status else "reservated"
-
-        print("Stolik ID: " + str(Table.ID) + " | Liczba miejsc: " + str(Table.Chairs) + " | Status: " + str(Status))
-
         Data.append({"ID": Table.ID, "Chairs": Table.Chairs, "Status": Status, "CSS_Class": CSS_Class})
 
     return jsonify(Data), 200

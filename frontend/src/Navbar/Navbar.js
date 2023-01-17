@@ -1,6 +1,6 @@
 // Imports
 import './Navbar.css';
-import React from 'react';
+import React, {useContext} from 'react';
 
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,8 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import {NavLink} from "react-router-dom";
-import {getCookie} from "../Others/token";
 import {Avatar, Tooltip} from "@mui/material";
+import {usernameContext} from "../App";
 
 // Code
 export default function Navbar() {
@@ -38,10 +38,20 @@ export default function Navbar() {
         }
     ];
 
-    const settings = ['Profile', 'Logout'];
+    const settings = [
+        {
+            name: "Profil",
+            path: "/profile"
+        },
+        {
+            name: "Logout",
+            path: "/logout"
+        }
+    ];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const {username} = useContext(usernameContext)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -55,6 +65,33 @@ export default function Navbar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    console.log(username);
+    function loginSwtich() {
+        if (username === '') {
+            return (
+                <NavLink to="/auth" key="Auth"> <Button>Logowanie</Button></NavLink>
+            )
+        } else {
+            return (
+                <>
+                    {username}
+                    <Tooltip title={username}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenUserMenu}
+                            color="inherit"
+                        >
+                            <Avatar sx={{ width: 32, height: 32 }}/>
+                        </IconButton>
+                    </Tooltip>
+                </>
+            )
+        }
+    }
 
     return (
         <>
@@ -152,20 +189,7 @@ export default function Navbar() {
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            {!getCookie('csrf_access_token') ? (
-                                <NavLink to="/auth" key="Auth"> <Button>Logowanie</Button></NavLink>
-                            ) : (
-                                <>
-                                    <NavLink to="/profile" key="Auth"> <Button>Profile</Button></NavLink>
-                                    <Tooltip title="Open settings">
-
-
-                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 2}}>
-                                            <Avatar alt="Remy Sharp" />
-                                        </IconButton>
-                                    </Tooltip>
-                                </>
-                            )}
+                            {loginSwtich()}
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"
@@ -184,7 +208,9 @@ export default function Navbar() {
                             >
                                 {settings.map((setting) => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                        <NavLink to={setting.path}>
+                                            <Typography textAlign="center" color={"black"}>{setting.name}</Typography>
+                                        </NavLink>
                                     </MenuItem>
                                 ))}
                             </Menu>
