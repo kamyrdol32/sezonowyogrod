@@ -83,3 +83,51 @@ def get_reservation():
         Data.append({"ID": Table.ID, "Chairs": Table.Chairs, "Status": Status, "CSS_Class": CSS_Class})
 
     return jsonify(Data), 200
+
+
+@api_blueprint.route('/reservation/user/get', methods=['POST'])
+@jwt_required()
+def get_user_reservation():
+
+    Data = []
+
+    username = request.json.get("username", None)
+
+    if not username:
+        return jsonify({"msg": "Missing username parameter"}), 400
+
+    user_id = core.models.User.query.filter_by(Username=username).first().ID
+    reservations = core.models.Reservation.query.filter_by(User_ID=user_id).all()
+
+    for reservation in reservations:
+        Data.append({
+            "ID_Reservation": reservation.ID,
+            "ID_Table": reservation.Table_ID,
+            "Data": str(reservation.Start_Date).split(" ")[0],
+            "Start_Hour": str(reservation.Start_Date).split(" ")[1][:-3],
+            "End_Hour": str(reservation.End_Date).split(" ")[1][:-3],
+            "Chairs": core.models.Table.query.filter_by(ID=reservation.Table_ID).first().Chairs
+        })
+
+    return jsonify(Data), 200
+
+
+@api_blueprint.route('/reservation/user/cancel', methods=['POST'])
+@jwt_required()
+def cancel_user_reservation():
+
+    username = request.json.get("username", None)
+    ID = request.json.get("ID", None)
+
+    # Get data
+    user_id = core.models.User.query.filter_by(Username=username).first().ID
+    reservation = core.models.Reservation.query.filter_by(User_ID=user_id, ID=ID).first()
+
+    # Delete reservation
+    core.db.session.delete(reservation)
+    core.db.session.commit()
+
+    if not username:
+        return jsonify({"msg": "Missing username parameter"}), 400
+
+    return jsonify({"msg": "Reservation deleted successfully"}), 200

@@ -43,7 +43,7 @@ export function axios_post(url, data, tokenRequired) {
 
     postData
         .then(response => {
-            console.log(response)
+            // console.log(response)
             if (response.status === 200 && response.data.token) {
                 localStorage.setItem('username', getJWTUsername(response.data.token))
             }

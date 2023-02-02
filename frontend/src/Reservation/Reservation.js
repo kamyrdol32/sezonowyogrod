@@ -65,9 +65,9 @@ export default function Reservation(){
             .then((response) => {
                 console.log(response.data.msg)
                 const element = document.getElementById(Table_ID)
-                element.classList.remove('selected')
                 element.classList.add('reserved')
-                queryClient.invalidateQueries('Tables');
+                element.classList.remove('selected')
+                fetchTables(date, hour, people)
                 setSelected(0)
             })
 	}
