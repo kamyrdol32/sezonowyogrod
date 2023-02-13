@@ -131,3 +131,24 @@ def cancel_user_reservation():
         return jsonify({"msg": "Missing username parameter"}), 400
 
     return jsonify({"msg": "Reservation deleted successfully"}), 200
+
+
+@api_blueprint.route('/products/get', methods=['GET'])
+def get_products():
+    try:
+        Table = []
+
+        products = core.models.Products.query.all()
+        for product in products:
+            Table.append({
+                "ID": product.ID,
+                "Name": product.Name,
+                "Price": product.Price,
+                "Description": product.Description,
+                "Image": product.Image,
+            })
+
+        return jsonify({"data": Table}), 200
+
+    except Exception as error:
+        return jsonify({"error": str(error)}), 400

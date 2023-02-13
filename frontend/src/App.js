@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {isUsername} from "./Others/token";
 
 // Components
 import Home from './Home/Home.js';
@@ -17,7 +18,7 @@ import Gallery from "./Gallery/Gallery";
 import Reservation from "./Reservation/Reservation";
 import Profile from "./Profile/Profile";
 import Logout from "./Logout/Logout";
-import {isUsername} from "./Others/token";
+import Shop from "./Shop/Shop";
 
 // Code
 const queryClient = new QueryClient()
@@ -40,9 +41,10 @@ function App() {
                             <Route path="/reservation" element={<Reservation />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/logout" element={<Logout />} />
+                            <Route path="/shop" element={<Shop />} />
                         </Routes>
                     </div>
-                    <Footer />
+                    {/*<Footer />*/}
                     <ToastContainer
                         position="bottom-right"
                         autoClose={5000}

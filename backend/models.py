@@ -20,6 +20,7 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.Username
 
+
 class Table(db.Model):
     __tablename__ = 'Table'
     ID = db.Column(db.Integer, primary_key=True)
@@ -27,6 +28,7 @@ class Table(db.Model):
 
     def __repr__(self):
         return '<Chair %r>' % self.Name
+
 
 class Reservation(db.Model):
     __tablename__ = 'Reservation'
@@ -43,6 +45,14 @@ class Reservation(db.Model):
         self.Start_Date = Start_Date
         self.End_Date = End_Date
 
-
     def __repr__(self):
         return '<Chair %r>' % self.Name
+
+
+class Products(db.Model):
+    __tablename__ = "Products"
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(128), unique=True, nullable=False)
+    Description = db.Column(db.String(256), unique=False, nullable=False)
+    Price = db.Column(db.Integer, unique=True, nullable=False)
+    Image = db.Column(db.Text(10000000), unique=False, nullable=True)

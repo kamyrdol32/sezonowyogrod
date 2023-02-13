@@ -6,17 +6,10 @@ import {useContext} from "react";
 import {usernameContext} from "../App";
 
 // Code
-export function axios_get(url, tokenRequired) {
+export function axios_get(url) {
 
     let headers = {
         'Content-Type': 'application/json',
-    }
-
-    if (tokenRequired) {
-        headers = {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': getCookie('csrf_access_token'),
-        }
     }
 
     return axios.get(url, {
