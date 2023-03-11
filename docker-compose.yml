@@ -11,7 +11,7 @@ services:
         ports:
             - "3003:3003"
         networks:
-            -   sezonowyogrod_network
+            -   sezonowyogrod_default
 
 
     sezonowyogrod-backend:
@@ -23,9 +23,9 @@ services:
         ports:
             -   "5003:5003"
         networks:
-            - sezonowyogrod_network
+            - sezonowyogrod_default
 
 
 networks:
-    sezonowyogrod_network:
+    sezonowyogrod_default:
         external: true
