@@ -1,27 +1,19 @@
-# Image
-FROM node:alpine as builder
+FROM node
 
-# Work directory
+# Create app directory
 WORKDIR /frontend
 
-# Requirements
+# Copy package.json
 COPY package*.json ./
 
-# Installations
+# Install app dependencies
 RUN npm install
 
-# Copy source code
-COPY ./ ./
+# Copy app source code
+COPY . .
 
-# Build
-RUN npm run build
+# Expose port 3000
+EXPOSE 3003
 
-
-# Image Nginx
-FROM nginx:alpine
-
-# Copy build
-COPY --from=builder /frontend/build /usr/share/nginx/html
-
-# Expose port
-EXPOSE 80
+# Run app
+CMD [ "npm", "run", "dev" ]

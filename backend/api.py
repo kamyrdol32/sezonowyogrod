@@ -1,23 +1,17 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
-import core
+from core import db
+import models
 
 api_blueprint = Blueprint('api', __name__)
-
-@api_blueprint.route('/db/create', methods=['GET'])
-def create_db():
-    with core.app.app_context():
-        core.db.create_all()
-    return jsonify({"msg": "Database created successfully"}), 200
-
 
 @api_blueprint.route('/reservation/add', methods=['POST'])
 @jwt_required()
 def add_reservation():
 
     username = get_jwt_identity()
-    user_id = core.models.User.query.filter_by(Username=username).first().ID
+    user_id = models.User.query.filter_by(Username=username).first().ID
 
     table_id = request.json.get("table_id", None)
     date = request.json.get("date", None)
@@ -42,9 +36,9 @@ def add_reservation():
     start_date = date + " " + str(hour) + ":00:00"
     end_date = date + " " + str(hour + 2)  + ":00:00"
 
-    reservation = core.models.Reservation(Table_ID=table_id, User_ID=user_id, Start_Date=start_date, End_Date=end_date)
-    core.db.session.add(reservation)
-    core.db.session.commit()
+    reservation = models.Reservation(Table_ID=table_id, User_ID=user_id, Start_Date=start_date, End_Date=end_date)
+    db.session.add(reservation)
+    db.session.commit()
 
     print("[INFO] Reservation added successfully")
     return jsonify({"msg": "Reservation added successfully"}), 200
@@ -63,9 +57,9 @@ def get_reservation():
     start_date = date + " " + str(hour) + ":00:00"
     end_date = date + " " + str(hour + 2) + ":00:00"
 
-    Reservations = core.models.Reservation.query.filter(core.models.Reservation.Start_Date == start_date, core.models.Reservation.End_Date == end_date).all()
-    AllTables = core.models.Table.query.all()
-    Chairs = core.models.Table.query.all()
+    Reservations = models.Reservation.query.filter(models.Reservation.Start_Date == start_date, models.Reservation.End_Date == end_date).all()
+    AllTables = models.Table.query.all()
+    Chairs = models.Table.query.all()
 
     if peoples%2 == 1:
         peoples += 1
@@ -96,8 +90,8 @@ def get_user_reservation():
     if not username:
         return jsonify({"msg": "Missing username parameter"}), 400
 
-    user_id = core.models.User.query.filter_by(Username=username).first().ID
-    reservations = core.models.Reservation.query.filter_by(User_ID=user_id).all()
+    user_id = models.User.query.filter_by(Username=username).first().ID
+    reservations = models.Reservation.query.filter_by(User_ID=user_id).all()
 
     for reservation in reservations:
         Data.append({
@@ -106,7 +100,7 @@ def get_user_reservation():
             "Data": str(reservation.Start_Date).split(" ")[0],
             "Start_Hour": str(reservation.Start_Date).split(" ")[1][:-3],
             "End_Hour": str(reservation.End_Date).split(" ")[1][:-3],
-            "Chairs": core.models.Table.query.filter_by(ID=reservation.Table_ID).first().Chairs
+            "Chairs": models.Table.query.filter_by(ID=reservation.Table_ID).first().Chairs
         })
 
     return jsonify(Data), 200
@@ -120,12 +114,12 @@ def cancel_user_reservation():
     ID = request.json.get("ID", None)
 
     # Get data
-    user_id = core.models.User.query.filter_by(Username=username).first().ID
-    reservation = core.models.Reservation.query.filter_by(User_ID=user_id, ID=ID).first()
+    user_id = models.User.query.filter_by(Username=username).first().ID
+    reservation = models.Reservation.query.filter_by(User_ID=user_id, ID=ID).first()
 
     # Delete reservation
-    core.db.session.delete(reservation)
-    core.db.session.commit()
+    db.session.delete(reservation)
+    db.session.commit()
 
     if not username:
         return jsonify({"msg": "Missing username parameter"}), 400
@@ -138,7 +132,7 @@ def get_products():
     try:
         Table = []
 
-        products = core.models.Products.query.all()
+        products = models.Products.query.all()
         for product in products:
             Table.append({
                 "ID": product.ID,

@@ -1,10 +1,10 @@
 // Imports
 import {useContext, useEffect} from "react";
-import {axios_get, axios_post} from "../Others/requests";
+import {axios_get, axios_post} from "../Others/requests.jsx";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import {removeUsername} from "../Others/token";
-import {usernameContext} from "../App";
+import {removeUsername} from "../Others/token.jsx";
+import {usernameContext} from "../App.jsx";
 
 
 // Code

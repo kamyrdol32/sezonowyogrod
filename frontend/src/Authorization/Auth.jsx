@@ -4,14 +4,14 @@ import './Auth.css';
 // Imports
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import {usernameContext} from "../App";
+import {usernameContext} from "../App.jsx";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import {axios_post} from "../Others/requests";
+import {axios_post} from "../Others/requests.jsx";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {useContext} from "react";
-import {getJWTUsername} from "../Others/token";
+import {getJWTUsername} from "../Others/token.jsx";
 
 
 // Code

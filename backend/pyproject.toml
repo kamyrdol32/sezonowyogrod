@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["kamyrdol32 <kamyrdol32@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = "^2.0.5.post1"
+flask = "^2.2.3"
+flask-mail = "^0.9.1"
+flask-sqlalchemy = "^3.0.3"
+pymysql = "^1.0.2"
+gunicorn = "^20.1.0"
+flask-jwt-extended = "^4.4.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

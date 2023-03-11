@@ -3,10 +3,10 @@ import './Profile.css';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {useContext, useState} from "react";
-import {usernameContext} from "../App";
-import {axios_post} from "../Others/requests";
+import {usernameContext} from "../App.jsx";
+import {axios_post} from "../Others/requests.jsx";
 import {useNavigate} from "react-router-dom";
-import Loader from "../Others/Loader";
+import Loader from "../Others/Loader.jsx";
 import * as React from "react";
 import {toast} from "react-toastify";
 

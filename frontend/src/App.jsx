@@ -7,18 +7,18 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {isUsername} from "./Others/token";
+import {isUsername} from "./Others/token.jsx";
 
 // Components
-import Home from './Home/Home.js';
-import Auth from './Authorization/Auth';
-import Navbar from "./Navbar/Navbar";
-import Footer from "./Footer/Footer";
-import Gallery from "./Gallery/Gallery";
-import Reservation from "./Reservation/Reservation";
-import Profile from "./Profile/Profile";
-import Logout from "./Logout/Logout";
-import Shop from "./Shop/Shop";
+import Home from './Home/Home.jsx';
+import Auth from './Authorization/Auth.jsx';
+import Navbar from "./Navbar/Navbar.jsx";
+import Footer from "./Footer/Footer.jsx";
+import Gallery from "./Gallery/Gallery.jsx";
+import Reservation from "./Reservation/Reservation.jsx";
+import Profile from "./Profile/Profile.jsx";
+import Logout from "./Logout/Logout.jsx";
+import Shop from "./Shop/Shop.jsx";
 
 // Code
 const queryClient = new QueryClient()

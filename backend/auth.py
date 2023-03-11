@@ -4,8 +4,10 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, set_access_cookies, get_jwt, \
     unset_jwt_cookies
 
-import core
-import api
+from others import hash_password
+from core import db
+from api import api_blueprint
+import models
 
 auth_blueprint = Blueprint('auth', __name__)
 
@@ -20,11 +22,11 @@ def login():
     if not password:
         return jsonify({"msg": "Missing password parameter"}), 400
 
-    user = core.db.session.query(core.models.User).filter_by(Username=username).first()
+    user = db.session.query(models.User).filter_by(Username=username).first()
     if user is None:
         return jsonify({"msg": "Bad username or password"}), 401
 
-    if user.Password != core.others.hash_password(password):
+    if user.Password != hash_password(password):
         return jsonify({"msg": "Bad username or password"}), 401
 
     # Success - generate access token
@@ -55,13 +57,13 @@ def register():
     if password != reapet_password:
         return jsonify({"msg": "Passwords do not match"}), 400
 
-    user = core.db.session.query(core.models.User).filter_by(Username=username).first()
+    user = db.session.query(models.User).filter_by(Username=username).first()
     if user is not None:
         return jsonify({"msg": "User already exists"}), 400
 
-    user = core.models.User(Email=email, Username=username, Password=core.others.hash_password(password))
-    core.db.session.add(user)
-    core.db.session.commit()
+    user = models.User(Email=email, Username=username, Password=hash_password(password))
+    db.session.add(user)
+    db.session.commit()
 
 
     return jsonify({"msg": "Registered successfully"}), 200
@@ -84,7 +86,7 @@ def protected():
 
 
 @auth_blueprint.after_request
-@api.api_blueprint.after_request
+@api_blueprint.after_request
 def refresh_expiring_jwts(response):
     try:
         exp_timestamp = get_jwt()["exp"]

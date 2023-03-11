@@ -1,9 +1,9 @@
 // Imports
 import axios from "axios";
-import {getCookie, getJWTUsername, removeUsername} from "./token";
+import {getCookie, getJWTUsername, removeUsername} from "./token.jsx";
 import {toast} from "react-toastify";
 import {useContext} from "react";
-import {usernameContext} from "../App";
+import {usernameContext} from "../App.jsx";
 
 // Code
 export function axios_get(url) {

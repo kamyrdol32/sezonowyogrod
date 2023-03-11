@@ -5,11 +5,11 @@ import './Reservation.css';
 // Imports
 import * as React from 'react';
 import MenuItem from "@mui/material/MenuItem";
-import {axios_post} from "../Others/requests";
+import {axios_post} from "../Others/requests.jsx";
 import TextField from "@mui/material/TextField";
 import {FormGroup, Select} from "@mui/material";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
-import Loader from "../Others/Loader";
+import Loader from "../Others/Loader.jsx";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
 import Grid from "@mui/material/Grid";

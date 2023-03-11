@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import {NavLink} from "react-router-dom";
 import {Avatar, Tooltip} from "@mui/material";
-import {usernameContext} from "../App";
+import {usernameContext} from "../App.jsx";
 
 // Code
 export default function Navbar() {

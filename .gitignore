@@ -7,23 +7,23 @@
 
 ### Frontend
 # dependencies
-/frontend/node_modules
-/frontend/.pnp
-/frontend/.pnp.js
+/frontend_old/node_modules
+/frontend_old/.pnp
+/frontend_old/.pnp.js
 
 # testing
-/frontend/coverage
+/frontend_old/coverage
 
 # production
-/frontend/build
+/frontend_old/build
 
 # misc
-/frontend/.DS_Store
-/frontend/.env.local
-/frontend/.env.development.local
-/frontend/.env.test.local
-/frontend/.env.production.local
+/frontend_old/.DS_Store
+/frontend_old/.env.local
+/frontend_old/.env.development.local
+/frontend_old/.env.test.local
+/frontend_old/.env.production.local
 
-/frontend/npm-debug.log*
-/frontend/yarn-debug.log*
-/frontend/yarn-error.log*
+/frontend_old/npm-debug.log*
+/frontend_old/yarn-debug.log*
+/frontend_old/yarn-error.log*

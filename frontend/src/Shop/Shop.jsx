@@ -1,6 +1,6 @@
 // CSS
 import './Shop.css';
-import {axios_get} from "../Others/requests";
+import {axios_get} from "../Others/requests.jsx";
 import {useEffect, useState} from "react";
 
 // Imports
