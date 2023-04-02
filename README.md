@@ -10,9 +10,6 @@ This website is designed for a health-conscious restaurant and offers a variety 
 | **Kamil Żegleń** ([kamyrdol32](https://github.com/kamyrdol32))  | ![100%](https://progress-bar.dev/100)  | ![0%](https://progress-bar.dev/0)  |
 | **Weronika Ścibior** ([weronika2241](https://github.com/weronika2241))  | ![0%](https://progress-bar.dev/0)  | ![100%](https://progress-bar.dev/100)  |
 
-## Installation
-`Comming soon`
-
 ## Technologies used:
   - **Python**:
       - Flask,
@@ -27,8 +24,30 @@ This website is designed for a health-conscious restaurant and offers a variety 
   - **CSS**:
     - MUI,
     
+## Installation
+### Requirements
+  - **Docker & Docker Compose**
+  
+### Environment Variables
+To run this project, you will need to add the following environment file on main directory:
+
+
+**.env.backend**
+```bash
+SECRET_KEY=""
+SQLALCHEMY_DATABASE_URI=""
+JWT_SECRET_KEY=""
+```
+
+### Instruction
+To deploy this project run project
+
+```bash
+docker-compose up
+```
+
 ## Demo:
-`Comming soon`
+<https://sezonowyogrod.kamilzeglen.pl/>
     
 ## Pictures:
 `Comming soon`
