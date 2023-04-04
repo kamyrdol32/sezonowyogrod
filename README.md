@@ -29,10 +29,10 @@ This website is designed for a health-conscious restaurant and offers a variety 
   - **Docker & Docker Compose**
   
 ### Environment Variables
-To run this project, you will need to add the following environment file on main directory:
+To run this project, you will need to add the following environment file on **backend** directory:
 
 
-**.env.backend**
+**.env**
 ```bash
 SECRET_KEY=""
 SQLALCHEMY_DATABASE_URI=""

@@ -1,17 +1,24 @@
 from datetime import datetime, timezone, timedelta
 
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, set_access_cookies, get_jwt, \
-    unset_jwt_cookies
+from flask_jwt_extended import (
+    jwt_required,
+    create_access_token,
+    get_jwt_identity,
+    set_access_cookies,
+    get_jwt,
+    unset_jwt_cookies,
+)
 
 from others import hash_password
 from core import db
 from api import api_blueprint
 import models
 
-auth_blueprint = Blueprint('auth', __name__)
+auth_blueprint = Blueprint("auth", __name__)
 
-@auth_blueprint.route('/login', methods=['POST'])
+
+@auth_blueprint.route("/login", methods=["POST"])
 def login():
     username = request.json.get("username", None)
     password = request.json.get("password", None)
@@ -35,7 +42,8 @@ def login():
     set_access_cookies(response, access_token)
     return response, 200
 
-@auth_blueprint.route('/register', methods=['POST'])
+
+@auth_blueprint.route("/register", methods=["POST"])
 def register():
     username = request.json.get("username", None)
     email = request.json.get("email", None)
@@ -65,10 +73,10 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-
     return jsonify({"msg": "Registered successfully"}), 200
 
-@auth_blueprint.route('/logout', methods=['GET'])
+
+@auth_blueprint.route("/logout", methods=["GET"])
 # @jwt_required
 def logout():
     response = jsonify({"msg": "logout successful"})
@@ -82,7 +90,6 @@ def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
-
 
 
 @auth_blueprint.after_request

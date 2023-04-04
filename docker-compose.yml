@@ -20,7 +20,7 @@ services:
             dockerfile: Dockerfile
         container_name: sezonowyogrod-backend
         env_file:
-            - .env.backend
+            - backend/.env
         restart: unless-stopped
         ports:
             -   "5003:5003"

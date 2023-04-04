@@ -4,7 +4,7 @@ from core import db
 
 
 class User(db.Model):
-    __tablename__ = 'Users'
+    __tablename__ = "Users"
     ID = db.Column(db.Integer, primary_key=True)
     Email = db.Column(db.String(128), unique=True, nullable=False)
     Username = db.Column(db.String(128), unique=True, nullable=False)
@@ -18,20 +18,20 @@ class User(db.Model):
         self.Password = Password
 
     def __repr__(self):
-        return '<User %r>' % self.Username
+        return "<User %r>" % self.Username
 
 
 class Table(db.Model):
-    __tablename__ = 'Table'
+    __tablename__ = "Table"
     ID = db.Column(db.Integer, primary_key=True)
     Chairs = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return '<Chair %r>' % self.Name
+        return "<Chair %r>" % self.Name
 
 
 class Reservation(db.Model):
-    __tablename__ = 'Reservation'
+    __tablename__ = "Reservation"
     ID = db.Column(db.Integer, primary_key=True)
     Table_ID = db.Column(db.Integer, nullable=False)
     User_ID = db.Column(db.Integer, nullable=False)
@@ -46,7 +46,7 @@ class Reservation(db.Model):
         self.End_Date = End_Date
 
     def __repr__(self):
-        return '<Chair %r>' % self.Name
+        return "<Chair %r>" % self.Name
 
 
 class Products(db.Model):
