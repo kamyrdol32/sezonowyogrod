@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 
@@ -18,6 +18,10 @@ app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
 with app.app_context():
     db.create_all()
+
+@app.route("/health_check")
+def health_check():
+    return jsonify("OK"), 200
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
