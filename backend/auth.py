@@ -76,11 +76,6 @@ def register():
     return jsonify({"msg": "Registered successfully"}), 200
 
 
-@auth_blueprint.route("/status", methods=["GET"])
-def status():
-    return "OK", 200
-
-
 @auth_blueprint.route("/logout", methods=["GET"])
 # @jwt_required
 def logout():
