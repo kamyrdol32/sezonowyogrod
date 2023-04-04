@@ -18,11 +18,6 @@ app.register_blueprint(api_blueprint, url_prefix="/api")
 app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
 
-@app.route("/health_check")
-def health_check():
-    return jsonify("OK"), 200
-
-
 with app.app_context():
     db.create_all()
 
