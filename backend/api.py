@@ -6,6 +6,11 @@ import models
 
 api_blueprint = Blueprint('api', __name__)
 
+
+@api_blueprint.route("/health_check")
+def health_check():
+    return jsonify("OK"), 200
+
 @api_blueprint.route('/reservation/add', methods=['POST'])
 @jwt_required()
 def add_reservation():
