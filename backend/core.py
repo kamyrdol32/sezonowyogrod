@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -8,6 +9,7 @@ app.config.from_object("config")
 db = SQLAlchemy()
 db.init_app(app)
 jwt = JWTManager(app)
+CORS(app)
 
 from api import api_blueprint
 from auth import auth_blueprint
