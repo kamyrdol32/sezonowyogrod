@@ -76,8 +76,8 @@ def register():
     return jsonify({"msg": "Registered successfully"}), 200
 
 
-@auth_blueprint.route("/health_check")
-def health_check():
+@auth_blueprint.route("/status", methods=["GET"])
+def status():
     return "OK", 200
 
 
