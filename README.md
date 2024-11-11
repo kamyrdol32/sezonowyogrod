@@ -7,8 +7,8 @@ This website is designed for a health-conscious restaurant and offers a variety 
 
 | Author | Backend | Frontend |
 | :---: | :---: | :---: |
-| **Kamil Żegleń** ([kamyrdol32](https://github.com/kamyrdol32))  | ![100%](https://progress-bar.dev/100)  | ![0%](https://progress-bar.dev/0)  |
-| **Weronika Ścibior** ([weronika2241](https://github.com/weronika2241))  | ![0%](https://progress-bar.dev/0)  | ![100%](https://progress-bar.dev/100)  |
+| **Kamil Żegleń** ([kamyrdol32](https://github.com/kamyrdol32))  | 100% | 0% |
+| **Weronika Ścibior** ([weronika2241](https://github.com/weronika2241))  | 0% | 100% |
 
 ## Technologies used:
   - **Python**:
